@@ -6,15 +6,15 @@
   
   <title>JavaLearing | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="#Java学习##编程基础  ###基础知识杂记1.进制转换 二进制：0b开头 八进制：0开头 十六进制：0x开头 2.运算符    位运算符：     操作的都为整型数据     右移运算符根据最高位的数来补充（&gt;&gt;&gt;都用0补）     ~：正(负)数取反，各二进制码按补码各位取反     运算符优先级： 3.Scanner int型数据：nextInt() double型数据">
+  <meta name="description" content="#Java学习##编程基础  ###基础知识杂记1.进制转换 二进制：0b开头 八进制：0开头 十六进制：0x开头 2.运算符    位运算符：     操作的都为整型数据     右移运算符根据最高位的数来补充（&gt;&gt;&gt;都用0补）     ~：正(负)数取反，各二进制码按补码各位取反     运算符优先级： 3.Scanner 包：java.util.Scanner 对象生成：S">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaLearing">
 <meta property="og:url" content="http://example.com/2021/03/08/JavaLearing/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="#Java学习##编程基础  ###基础知识杂记1.进制转换 二进制：0b开头 八进制：0开头 十六进制：0x开头 2.运算符    位运算符：     操作的都为整型数据     右移运算符根据最高位的数来补充（&gt;&gt;&gt;都用0补）     ~：正(负)数取反，各二进制码按补码各位取反     运算符优先级： 3.Scanner int型数据：nextInt() double型数据">
+<meta property="og:description" content="#Java学习##编程基础  ###基础知识杂记1.进制转换 二进制：0b开头 八进制：0开头 十六进制：0x开头 2.运算符    位运算符：     操作的都为整型数据     右移运算符根据最高位的数来补充（&gt;&gt;&gt;都用0补）     ~：正(负)数取反，各二进制码按补码各位取反     运算符优先级： 3.Scanner 包：java.util.Scanner 对象生成：S">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-03-08T06:43:23.566Z">
-<meta property="article:modified_time" content="2021-03-09T04:20:30.712Z">
+<meta property="article:modified_time" content="2021-03-13T02:41:06.846Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -107,21 +107,62 @@
     ~：正(负)数取反，各二进制码按补码各位取反
     运算符优先级：</code></pre>
 <p>3.Scanner</p>
-<pre><code>int型数据：nextInt()
+<pre><code>包：java.util.Scanner
+对象生成：Scanner scanner = new Scanner(System.in);
+
+int型数据：nextInt()
 double型数据：nextDouble()
 float型数据：nextFloat()
 boolean型数据：nextBoolean()
-char型数据：Scanner没有提供相关的方法，只能通过获取一个字符串，再通过String当中的charAt()获取</code></pre>
-<p>注意：需要根据相应的方法来输入指定类型的值，如果输入的数据类型与要求的类型不匹配时，会报异常</p>
+char型数据：Scanner没有提供相关的方法，只能通过获取一个字符串，再通过String当中的charAt()获取
+
+注意：需要根据相应的方法来输入指定类型的值，如果输入的数据类型与要求的类型不匹配时，会报异常</code></pre>
 <p>4.条件转换语句</p>
 <pre><code>switch结构中的表达式所允许的数据类型：
     byte、short、char、int、枚举类型（JDK5.0新增）、String类型（JDK7.0新增）</code></pre>
+<p>5.可变个数形参(jdk5.0新增的内容)</p>
+<pre><code>格式：数据类型 ... 变量名
+使用：其性质与数组相同
+注意：
+    (1)    则其与本类名中方法名相同，形参类型也相同的数组之间不构成重载，二者不能共存
+    (2)    在形参当中使用，必须声明在末尾
+    (3)    最多只能声明一个可变形参</code></pre>
+<p>6.Java中的参数传递机制：值传递</p>
+<pre><code>如果参数是基本数据类型，此时实参赋给形参的是实参的真实存储的数据值
+如果参数是引用数据类型，此时实参赋给形参的是实参存储数据的地址值 </code></pre>
+<p>5.面向对象</p>
+<pre><code>对象的内存解析：
+    堆：所有的对象实例以及数组都要在堆上分配
+    栈（虚拟机栈）：用于存储局部变量等
+    方法区：用于存储已被虚拟机加载的类信息、常量、静态、变量、即使编译器编译后的代码等数据
+    类属性：在内存当中加载到对空间中
+    局部变量：在内存当中加载到栈空间中
+
+封装性：
+    访问权限：用于修饰类以及类的内部结构：属性、方法、构造器、内部类
+        (1)    private：类内部
+        (2)    default（缺省）：private + 同一个包 
+        (3)    protected：default + 不同包的子类
+        (4)    public：proctected + 同一个工程
+        注意：对于class的权限修饰只可以用public和default，public类可以在任意地方被访问，default类只可以被同一个包内部的类访问</code></pre>
 <hr>
+<p>###简单的类库使用<br>1.数学</p>
+<pre><code>Math.random():令系统随机选取大于等于0.0且小于1.0的伪随机double值
+    Math.random()*(n-m)+m：返回指定范围的随机数（m-n之间）的公式</code></pre>
+<p>2.字符</p>
+<pre><code>string.equals():判断二者是否相同 </code></pre>
+<p>3.Arrys工具类</p>
+<pre><code>Ops:java.util.Arrays
+Using:
+    sort():快速排序
+    binary():二分查找
+    equals():判断两个数组是否相同
+    fill(int[] a,int val):将指定值填充到数组之中</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/03/08/JavaLearing/" data-id="ckm35nsfi0001aoubcgj6fcdo" data-title="JavaLearing" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/03/08/JavaLearing/" data-id="ckm74h4t50000wsubef5d032l" data-title="JavaLearing" class="article-share-link">Share</a>
       
       
       
