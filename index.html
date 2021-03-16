@@ -81,16 +81,38 @@
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/03/15/STL/">STL</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>title:STL<br>tags:C++关于stl的使用</p>
-<hr>
-<h2 id="stl的使用"><a href="#stl的使用" class="headerlink" title="##stl的使用"></a>##stl的使用</h2><p>###pair的使用</p>
+        <h2 id="STL"><a href="#STL" class="headerlink" title="#STL"></a>#STL</h2><h2 id="stl的使用"><a href="#stl的使用" class="headerlink" title="##stl的使用"></a>##stl的使用</h2><p>###pair的使用</p>
+<pre><code>定义：
+    （1）pair&lt;数据类型,数据类型&gt; p;
+    （2）pair&lt;int,int&gt; p(1,5),直接初始化其内容
+    （3）pair&lt;int,int&gt; p[maxnum]，定义了一个pair类型数组
+
+访问：
+    通过first与second访问其前后的内容
+使用：
+    （1）向pair数组里面插入值
+        （a）map&lt;int,int&gt; mp;
+            mp.insert(make_pair(1,2));
+        （b）pair&lt;int,int&gt; p[maxnum];
+            p[i]=&#123;1,2&#125;;
+注意：可以直接使用关系运算符进行比较，当first相同时会通过判别second的大小来比较</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/03/15/STL/" data-id="ckmbe2dq600027cub2oo692yq" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/03/15/STL/" data-id="ckmbea2ks0001z4ubepu9a4nw" data-title="STL" class="article-share-link">Share</a>
       
       
       
@@ -112,11 +134,19 @@
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/03/15/algorithm/">algorithm</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>title:algorithm<br>tags:算法</p>
-<hr>
-<h2 id="algorithm"><a href="#algorithm" class="headerlink" title="#algorithm"></a>#algorithm</h2><h2 id="算法学习"><a href="#算法学习" class="headerlink" title="##算法学习"></a>##算法学习</h2><p>###快速排序</p>
+        <h2 id="algorithm"><a href="#algorithm" class="headerlink" title="#algorithm"></a>#algorithm</h2><h2 id="算法学习"><a href="#算法学习" class="headerlink" title="##算法学习"></a>##算法学习</h2><p>###快速排序</p>
 <pre><code>void quickSort(vector&lt;int&gt;&amp; arr,int left,int right)&#123;
     &lt;!--确定目标数与比较数的位置--&gt;
     int oldLeft = left,oldRight = right;
@@ -237,7 +267,7 @@ void heapSort(vector&lt;int&gt;&amp; args)&#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/03/15/algorithm/" data-id="ckmbe2dpw00007cub7lp1gmb9" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/03/15/algorithm/" data-id="ckmbea2kv0002z4ub6g3t8frz" data-title="algorithm" class="article-share-link">Share</a>
       
       
       
@@ -338,7 +368,7 @@ Using:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/03/08/JavaLearing/" data-id="ckmbe2dq300017cub056lbisw" data-title="JavaLearing" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/03/08/JavaLearing/" data-id="ckmbea2kl0000z4ubht3sgxv4" data-title="JavaLearing" class="article-share-link">Share</a>
       
       
       
@@ -500,7 +530,7 @@ LCN模式：
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/03/01/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF/" data-id="ckmbe2dq800037cubga5453w1" data-title="后端开发路线" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/03/01/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF/" data-id="ckmbea2kw0003z4ub3vaddyg7" data-title="后端开发路线" class="article-share-link">Share</a>
       
       
       
@@ -543,11 +573,11 @@ LCN模式：
       <ul>
         
           <li>
-            <a href="/2021/03/15/STL/">(no title)</a>
+            <a href="/2021/03/15/STL/">STL</a>
           </li>
         
           <li>
-            <a href="/2021/03/15/algorithm/">(no title)</a>
+            <a href="/2021/03/15/algorithm/">algorithm</a>
           </li>
         
           <li>
