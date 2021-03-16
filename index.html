@@ -71,6 +71,184 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-STL" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/03/15/STL/" class="article-date">
+  <time class="dt-published" datetime="2021-03-15T12:07:43.502Z" itemprop="datePublished">2021-03-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>title:STL<br>tags:C++关于stl的使用</p>
+<hr>
+<h2 id="stl的使用"><a href="#stl的使用" class="headerlink" title="##stl的使用"></a>##stl的使用</h2><p>###pair的使用</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/03/15/STL/" data-id="ckmbe2dq600027cub2oo692yq" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-algorithm" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/03/15/algorithm/" class="article-date">
+  <time class="dt-published" datetime="2021-03-15T12:05:55.901Z" itemprop="datePublished">2021-03-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>title:algorithm<br>tags:算法</p>
+<hr>
+<h2 id="algorithm"><a href="#algorithm" class="headerlink" title="#algorithm"></a>#algorithm</h2><h2 id="算法学习"><a href="#算法学习" class="headerlink" title="##算法学习"></a>##算法学习</h2><p>###快速排序</p>
+<pre><code>void quickSort(vector&lt;int&gt;&amp; arr,int left,int right)&#123;
+    &lt;!--确定目标数与比较数的位置--&gt;
+    int oldLeft = left,oldRight = right;
+
+    &lt;!-- 用于记录序列是否排序完毕 --&gt;
+    bool judge = true;
+    int    target = arr[left];
+
+    &lt;!-- 通过左右往返比较，确定目标值在序列当中的位置 --&gt;
+    while(left&lt;right)&#123;
+        while(left&lt;right &amp;&amp; arr[right]&gt;=target)&#123;
+            right--;
+            judge=false;
+        &#125;
+        arr[left] = arr[right];
+
+        while(left&lt;right &amp;&amp; arr[left]&lt;=target)&#123;
+            left++;
+            judge=false;
+        &#125;
+        arr[right] = arr[left];
+    &#125;
+    arr[left] = target;
+
+    &lt;!-- 将目标数左右两侧的序列分开进行排序 --&gt;
+    if(!judge)&#123;
+        quickSort(arr,oldLeft,left-1);
+        quickSort(arr,left+1,oldRight);
+    &#125;
+    return ;
+&#125;</code></pre>
+<hr>
+<p>###堆排序</p>
+<pre><code>void adjustPos(vector&lt;int&gt;&amp; args,int markPos,int size)
+&#123;
+    &lt;!-- 左右叶节点  --&gt;
+    int left = 2*markPos+1;
+    int right = 2*markPos+2;
+
+    &lt;!-- 记录最值位置，比较左右结点与根节点的大小  --&gt;
+    int maxNums=markPos;
+    if(left&lt;size &amp;&amp; args[left]&gt;args[maxNums])
+        maxNums = left;
+    if(right&lt;size &amp;&amp; args[right]&gt;args[maxNums])
+        maxNums = right;
+    if(maxNums!=markPos)&#123;
+        swap(args[maxNums],args[markPos]);    
+        adjustPos(args,maxNums,size);
+    &#125;
+    return ;
+&#125;
+void heapSort(vector&lt;int&gt;&amp; args)&#123;
+    int markNode=args.size()/2-1;        &lt;!-- 最后一个非叶子节点位置 --&gt; 
+
+    &lt;!-- 通过遍历非叶子结点，将其构造成大顶堆（升序）/小顶堆（降序） --&gt; 
+    for(int i=markNode;i&gt;=0;i--)&#123;
+        adjustPos(args,i,args.size());
+    &#125;
+
+    &lt;!-- 每次得到根节点为最大值  --&gt;
+    for(int i=args.size()-1;i&gt;=1;i--)&#123;
+        swap(args[i],args[0]);
+        adjustPos(args,0,i);
+    &#125;
+    return ;
+&#125;</code></pre>
+<p>###哈希表</p>
+<p>###优先队列（<a target="_blank" rel="noopener" href="https://www.cnblogs.com/huashanqingzhu/p/11040390.html%EF%BC%89">https://www.cnblogs.com/huashanqingzhu/p/11040390.html）</a></p>
+<pre><code>功能：在优先队列中，元素被赋予优先级，当访问元素时，具有最高优先级的元素最先删除。优先队列具有最高级先出的行为特征
+
+实现：
+    class prorityQueue&#123;
+        public:
+            prorityQueue()&#123;
+
+            &#125;
+            &lt;!-- 对于基本类型的大/小顶堆  --&gt;
+            void bigTopPile()&#123;
+                &lt;!-- 等同于priority_queue&lt;int,vector&lt;int&gt;,less&lt;int&gt; &gt; a
+                若要其置成小顶堆则
+                    priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; --&gt;
+                priority_queue&lt;int&gt; a;          
+                int s=0;
+                while(cin&gt;&gt;s)&#123;
+                    a.push(s);
+                &#125;
+                while(!a.empty())&#123;
+                    cout&lt;&lt;a.top()&lt;&lt;&quot; &quot;;
+                    a.pop();
+                &#125;
+                return ;
+            &#125;
+
+            &lt;!-- 使用pair做优先队列元素，先比较第一个元素，第一个相等比较第二个 --&gt;
+            void pairPriorityQueue(int nums)&#123;
+                priority_queue&lt;pair&lt;int,string&gt; &gt; pq;
+                int pos;
+                string posStr;
+                pair&lt;int,string&gt; p1[nums];
+                int i=0;
+                while(cin&gt;&gt;pos&gt;&gt;posStr)&#123;
+                    p1[i]=&#123;pos,posStr&#125;;
+                    pq.push(p1[i]);
+                    i++;
+                &#125;
+                while(!pq.empty())&#123;
+                    cout&lt;&lt;pq.top().first&lt;&lt;&quot; &quot;&lt;&lt;pq.top().second&lt;&lt;endl;
+                    pq.pop();
+                &#125;
+                return ;
+
+            &lt;!-- 用自定义的类型做优先队列元素 --&gt;
+
+            &#125;
+
+    &#125;;</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/03/15/algorithm/" data-id="ckmbe2dpw00007cub7lp1gmb9" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-JavaLearing" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/03/08/JavaLearing/" class="article-date">
@@ -160,7 +338,7 @@ Using:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/03/08/JavaLearing/" data-id="ckm75jec40000o0ubhfa4au7x" data-title="JavaLearing" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/03/08/JavaLearing/" data-id="ckmbe2dq300017cub056lbisw" data-title="JavaLearing" class="article-share-link">Share</a>
       
       
       
@@ -322,7 +500,7 @@ LCN模式：
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/03/01/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF/" data-id="ckm75jeci0001o0ub4xbkh59s" data-title="后端开发路线" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/03/01/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF/" data-id="ckmbe2dq800037cubga5453w1" data-title="后端开发路线" class="article-share-link">Share</a>
       
       
       
@@ -363,6 +541,14 @@ LCN模式：
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2021/03/15/STL/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/15/algorithm/">(no title)</a>
+          </li>
         
           <li>
             <a href="/2021/03/08/JavaLearing/">JavaLearing</a>
