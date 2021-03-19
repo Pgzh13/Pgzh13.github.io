@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>JavaLearing | Hexo</title>
+  <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="#Java学习##编程基础  ###基础知识杂记1.进制转换 二进制：0b开头 八进制：0开头 十六进制：0x开头 2.运算符    位运算符：     操作的都为整型数据     右移运算符根据最高位的数来补充（&gt;&gt;&gt;都用0补）     ~：正(负)数取反，各二进制码按补码各位取反     运算符优先级： 3.Scanner 包：java.util.Scanner 对象生成：S">
+  <meta name="description" content="— title: JavaLearing tags: —#Java学习  ##编程基础  ###基础知识杂记1.进制转换 二进制：0b开头 八进制：0开头 十六进制：0x开头 2.运算符    位运算符：     操作的都为整型数据     右移运算符根据最高位的数来补充（&gt;&gt;&gt;都用0补）     ~：正(负)数取反，各二进制码按补码各位取反     运算符优先级： 3.Scan">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaLearing">
+<meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://example.com/2021/03/08/JavaLearing/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="#Java学习##编程基础  ###基础知识杂记1.进制转换 二进制：0b开头 八进制：0开头 十六进制：0x开头 2.运算符    位运算符：     操作的都为整型数据     右移运算符根据最高位的数来补充（&gt;&gt;&gt;都用0补）     ~：正(负)数取反，各二进制码按补码各位取反     运算符优先级： 3.Scanner 包：java.util.Scanner 对象生成：S">
+<meta property="og:description" content="— title: JavaLearing tags: —#Java学习  ##编程基础  ###基础知识杂记1.进制转换 二进制：0b开头 八进制：0开头 十六进制：0x开头 2.运算符    位运算符：     操作的都为整型数据     右移运算符根据最高位的数来补充（&gt;&gt;&gt;都用0补）     ~：正(负)数取反，各二进制码按补码各位取反     运算符优先级： 3.Scan">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-03-08T06:43:23.566Z">
-<meta property="article:modified_time" content="2021-03-13T02:41:06.846Z">
+<meta property="article:modified_time" content="2021-03-16T03:24:26.157Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -83,19 +83,11 @@
   <div class="article-inner">
     
     
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      JavaLearing
-    </h1>
-  
-
-      </header>
-    
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="Java学习"><a href="#Java学习" class="headerlink" title="#Java学习"></a>#Java学习</h2><p>##编程基础</p>
+        <p>— title: JavaLearing tags: —<br>#Java学习</p>
+<hr>
+<p>##编程基础</p>
 <hr>
 <p>###基础知识杂记<br>1.进制转换</p>
 <pre><code>二进制：0b开头
@@ -130,7 +122,7 @@ char型数据：Scanner没有提供相关的方法，只能通过获取一个字
 <p>6.Java中的参数传递机制：值传递</p>
 <pre><code>如果参数是基本数据类型，此时实参赋给形参的是实参的真实存储的数据值
 如果参数是引用数据类型，此时实参赋给形参的是实参存储数据的地址值 </code></pre>
-<p>5.面向对象</p>
+<p>5.面向对象（程序设计要求高内聚、 低耦合）</p>
 <pre><code>对象的内存解析：
     堆：所有的对象实例以及数组都要在堆上分配
     栈（虚拟机栈）：用于存储局部变量等
@@ -144,7 +136,29 @@ char型数据：Scanner没有提供相关的方法，只能通过获取一个字
         (2)    default（缺省）：private + 同一个包 
         (3)    protected：default + 不同包的子类
         (4)    public：proctected + 同一个工程
-        注意：对于class的权限修饰只可以用public和default，public类可以在任意地方被访问，default类只可以被同一个包内部的类访问</code></pre>
+        注意：对于class的权限修饰只可以用public和default，public类可以在任意地方被访问，default类只可以被同一个包内部的类访问
+
+this关键字：
+    功能：用来修饰属性、方法、构造器，可以理解为当前对象或当前正在创建的对象
+    使用：
+        在类的构造器和方法中我们可以使用“this.属性”或“this.方法”的方式，来调用当前正在创建的对象属性或方法/已存在的对象属性或方法，同时我们可以通过使用“this（形参列表）”的方式，来调用本类中指定的其他构造器，但是不能调用自己这个构造器 
+
+package关键字：
+    功能：为了更好的实现项目中类的管理
+    使用：
+        （1）使用其声明类或接口所属的包，声明在源文件的首行
+        （2）属性名中每“.”一次，代表一层文件目录
+        （3）同一个包下，不能命名同名的接口或类
+
+import关键字：
+    功能：在源文件中显式的使用import结构导入指定包下的类、接口 
+    使用：
+        （1）声明在包的声明和类的声明之间
+        （2）使用“xxx.*”的方式，表示可以导入xxx包下的所有结构
+        （3）如果使用的类或接口是java.lang包下定义的或者是在本包下定义的，则可以省略import结构
+        （4）如果在源文件中，使用了不同包下的同名类，则必须至少有一个需要以全类名的方式显示
+        （5）使用“xxx.*”方式表明可以调用xxx包下的所有结构，但是如果使用的是xxx子包下的结构，则仍需导入 
+        （6）import static：导入指定类或接口中的静态结构</code></pre>
 <hr>
 <p>###简单的类库使用<br>1.数学</p>
 <pre><code>Math.random():令系统随机选取大于等于0.0且小于1.0的伪随机double值
@@ -158,11 +172,39 @@ Using:
     binary():二分查找
     equals():判断两个数组是否相同
     fill(int[] a,int val):将指定值填充到数组之中</code></pre>
+<p>4.JavaBean:是一种Java语言写成的可重用组件（也是一个Java类）</p>
+<pre><code>特征：
+    （1）类是公共的
+    （2）有一个无参的公共的构造器
+    （3）有属性，且对应的get、set方法
+功能：
+    可以将功能、处理、值、数据库访问和其他任何可以用Java代码创造对象进行打包，并且其他的开发者可以通过内部的JSP页面、Servlet、其他JavaBean、applet程序或者应用来使用这些对象。</code></pre>
+<p>5.UML类图</p>
+<pre><code>结构：
+    类名
+    属性（属性名：属性类型）
+    方法（方法的类型 方法名(参数名：参数类型)：返回值类型）注：若方法有下划线表示为构造器
+    ‘+’表示public,‘-’表示private，‘#’表示proctected</code></pre>
+<hr>
+<p>###Eclipse快捷键(可到preference当中的keys进行修改)</p>
+<pre><code>（1）补全代码的声明：alt + /
+（2）快速修复：ctrl + 1
+（3）批量导包：ctrl + shift + o
+（4）多行注释：ctrl + shift + /（取消使用 \ ）
+（5）复制指定行的代码：ctrl + alt +down 或 ctrl + alt + up
+（6）删除指定行的代码：ctrl + d
+（7）上下移动代码：alt + up 或 alt + down
+（8）切换到下一行代码空位：shift + enter（上一行则 + ctrl）
+（9）查看源码：ctrl + 选中指定结构 或 ctrl + shift + t
+（10）退回到前一个编辑页面：alt + left（下一个编辑界面则是alt + right）
+（11）光标选中指定的类，查看继承树结构：ctrl + t
+（12）撤销与反撤销：ctrl + z/y
+（13）</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/03/08/JavaLearing/" data-id="ckmbea2kl0000z4ubht3sgxv4" data-title="JavaLearing" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/03/08/JavaLearing/" data-id="ckmfrk8m40000acub4bqscm55" data-title="" class="article-share-link">Share</a>
       
       
       
@@ -230,7 +272,7 @@ Using:
           </li>
         
           <li>
-            <a href="/2021/03/08/JavaLearing/">JavaLearing</a>
+            <a href="/2021/03/08/JavaLearing/">(no title)</a>
           </li>
         
           <li>
