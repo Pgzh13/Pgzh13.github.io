@@ -14,7 +14,7 @@
 <meta property="og:description" content="title: JavaLearingtags:   #Java学习##编程基础  ###基础知识杂记1.进制转换 二进制：0b开头 八进制：0开头 十六进制：0x开头 2.运算符    位运算符：     操作的都为整型数据     右移运算符根据最高位的数来补充（&gt;&gt;&gt;都用0补）     ~：正(负)数取反，各二进制码按补码各位取反     运算符优先级： 3.Scanner">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-03-08T06:43:23.566Z">
-<meta property="article:modified_time" content="2021-03-30T07:55:06.519Z">
+<meta property="article:modified_time" content="2021-04-06T13:58:15.090Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -317,106 +317,11 @@ mian()方法
                 （2）提供全局常量：serialVersionUID
                 （3）提供重载的构造器</code></pre>
 <hr>
-<p>###简单的类库使用<br>1.数学</p>
-<pre><code>Math.random():令系统随机选取大于等于0.0且小于1.0的伪随机double值
-    Math.random()*(n-m)+m：返回指定范围的随机数（m-n之间）的公式</code></pre>
-<p>2.字符</p>
-<pre><code>string.equals():判断二者是否相同 </code></pre>
-<p>3.Arrys工具类</p>
-<pre><code>Ops:java.util.Arrays
-Using:
-    sort():快速排序
-    binary():二分查找
-    equals():判断两个数组是否相同
-    fill(int[] a,int val):将指定值填充到数组之中</code></pre>
-<p>4.JavaBean:是一种Java语言写成的可重用组件（也是一个Java类）</p>
-<pre><code>特征：
-    （1）类是公共的
-    （2）有一个无参的公共的构造器
-    （3）有属性，且对应的get、set方法
-功能：
-    可以将功能、处理、值、数据库访问和其他任何可以用Java代码创造对象进行打包，并且其他的开发者可以通过内部的JSP页面、Servlet、其他JavaBean、applet程序或者应用来使用这些对象。</code></pre>
-<p>5.UML类图</p>
-<pre><code>结构：
-    类名
-    属性（属性名：属性类型）
-    方法（方法的类型 方法名(参数名：参数类型)：返回值类型）注：若方法有下划线表示为构造器
-    ‘+’表示public,‘-’表示private，‘#’表示proctected</code></pre>
-<p>6.Object类（是所有java类的根父类，如果在类的声明中未使用extends关键字指明其父类，则默认父类为java.lang.Object类） </p>
-<pre><code>（1）equals()： 比较二者是否相同
-
-    使用：
-        （1）是一个方法，并不是运算符
-        （2）只能适用于引用数据类型
-        （3）Object类中定义的equals()和==的作用是相同的，比较两个对象的地址值是否相同
-        （4）在String、Data、File、包装类等都重写了Object类中的equals()方法，重写后，比较的是两个对象的实体内容
-
-    与“==”的却别：
-        ==：
-            （1）可以使用在基本数据类型 变量和引用数据类型变量中
-            （2）如果比较的是基本数据类型变量，比较二者保存的数据是否相同（不一定要类型相同）
-                如果比较的是引用数据类型变量，比较两个对象的地址值是否相同，即两个引用是否指向同一个对象实体
-
-（2）toString()：
-
-    使用：
-        a.当输出一个对象的引用时，实际上就是调用当前对象的toString()方法
-        b.String、Date、File、包装类等都重写了Object类中的toString()方法</code></pre>
-<p>7.包装类(Wrapper)的使用</p>
-<pre><code>功能：java提供了8种数据类型对应的包装类，使得基本数据类型的变量具有类的特征
-使用：
-    （1）基本数据类型、包装类、String三者之间的相互转换
-        基本数据类型-----&gt;包装类：调用包装类的构造器
-        包装类-----&gt;基本数据类型：调用包装类Xxx的xxxValue()
-        基本数据类型、包装类----&gt;String类型：调用String重载的valueOf(Xxx xxx)
-        String类型-------&gt;基本数据类型、包装类：调用包装类的parseXxx(String s)
-    注意：
-        自动装箱：可以直接将基本数据类型赋给包装类，可以提高效率（只可以赋值到-128到127，当大于这个数则会通过d调用构造器来创建对象）
-        自动拆箱：直接将包装类赋给基本数据类型</code></pre>
-<p>8.Vector类的使用</p>
-<pre><code>功能：代替数组进行处理
-使用：
-    （1）addElement(Object ob)：给向量添加元素
-    （2）elementAt(0)：取出向量中的元素，返回值是Object类型
-    （3）size()：计算向量长度 </code></pre>
-<hr>
-<p>###日常使用<br>（1）Eclipse快捷键(可到preference当中的keys进行修改)</p>
-<pre><code>（1）补全代码的声明：alt + /
-（2）快速修复：ctrl + 1
-（3）批量导包：ctrl + shift + o
-（4）多行注释：ctrl + shift + /（取消使用 \ ）
-（5）复制指定行的代码：ctrl + alt +down 或 ctrl + alt + up
-（6）删除指定行的代码：ctrl + d
-（7）上下移动代码：alt + up 或 alt + down
-（8）切换到下一行代码空位：shift + enter（上一行则 + ctrl）
-（9）查看源码：ctrl + 选中指定结构 或 ctrl + shift + t
-（10）退回到前一个编辑页面：alt + left（下一个编辑界面则是alt + right）
-（11）光标选中指定的类，查看继承树结构：ctrl + t
-（12）撤销与反撤销：ctrl + z/y
-（13）格式化代码：ctrl + shift +f
-（14）在当前类中，显示类结构，并支持搜索指定的方法、属性等：ctrl + o
-（15）批量修改指定的变量名、方法名、类名等：alt + shift + r
-（16）选中结构的大小写的切换：ctrl + shift + x/y
-（17）调出生成getter/setter/构造器等结构：alt + shift + s
-（18）显示当前选择资源（工程 或 文件）的属性：alt + enter
-（19）快速查找.参照选中的word快速定位到下一个：ctrl + k
-（20）关闭所有窗口：ctrl + shift + w
-（21）查看指定的结构使用过的地方：ctrl + alt + g
-（22）查找与替换：ctrl + f
-（23）最大化当前的View：ctrl + m
-（24）直接定位到当前行的首位：home
-（25）直接定位到当前行的末位：end</code></pre>
-<p>（2）JUnit单元测试</p>
-<pre><code>使用：
-    a.选中当当前工程-右键选择：bulid path - add libraries -JUnit 4 - 下一步
-    b.创建java类，进行单元测试，要求的Java类要求：1.此类权限为public 2.此类提供公共的无参构造函数
-    c.此类中声明单元测试方法：此时的单元测试方法权限是public，没有返回值，没有形参
-    d.此单元测试方法需要声明注解：@Test，并在单元测试类中导入：org.junit.Test包 </code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/03/08/JavaLearing/" data-id="ckmvqnkxx000584ub84da9mb1" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/03/08/JavaLearing/" data-id="ckn722y8a0000okub6j3ea4f6" data-title="" class="article-share-link">Share</a>
       
       
       
@@ -463,7 +368,7 @@ Using:
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li></ul>
     </div>
   </div>
 
@@ -474,6 +379,10 @@ Using:
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2021/04/06/java%E7%AE%80%E5%8D%95%E7%B1%BB%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/">Java类库与基本操作</a>
+          </li>
         
           <li>
             <a href="/2021/03/27/java%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">Java高级编程</a>
@@ -489,10 +398,6 @@ Using:
         
           <li>
             <a href="/2021/03/15/algorithm/">algorithm</a>
-          </li>
-        
-          <li>
-            <a href="/2021/03/08/JavaLearing/">(no title)</a>
           </li>
         
       </ul>

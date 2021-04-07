@@ -14,7 +14,7 @@
 <meta property="og:description" content="#高级编程##基础知识1.进程    定义：是程序依次执行过程，或正在运行的一个程序。是一个动态的过程：有它自身的产生、存在和消亡的过程—–生命周期    内容：        （1）进程作为资源分配的单位，系统在运行时回味每个进程分配不同的内存区域  2.线程 定义：是一个程序内部的一条执行路径  内容：     （1）线程作为调度和执行的单位，每个线程拥有独立的运行栈和程序计数器，线程切换的开">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-03-27T14:37:01.185Z">
-<meta property="article:modified_time" content="2021-03-30T08:06:16.617Z">
+<meta property="article:modified_time" content="2021-04-07T06:12:18.373Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -102,7 +102,7 @@
 内容：
     （1）线程作为调度和执行的单位，每个线程拥有独立的运行栈和程序计数器，线程切换的开销小
     （2）一个进程中的多个线程共享相同的内存单元/内存地址空间-&gt;它们从同一个堆中分配对象，可以访问相同的变量和对象
-    （3）
+
 
 生命周期：
     ![avatar](D:/ComputerUse/blog/img/live.jpg)
@@ -199,11 +199,44 @@ Thread类常见的方法：
         a.以上三个方法必须使用在同步代码块或同步方法中，同时其调用者必须是同步代码块或同步方法当中的同步监视器，否则会出现IllegalMonitorStateException异常
         b.上面三个方法是定义在java.lang.Object类中</code></pre>
 <p>3.并行与并发<br>    定义：并行指的是多个CPU同时执行多个任务，并发指的是一个CPU(采用时间片)同时执行多个任务</p>
+<p>###枚举类与注解<br>1.枚举类<br>    包：定义的枚举类默认继承于java.lang.Enum<br>    说明：<br>        a.类的对象只有有限个，确定的。当需要定义一组常量时，强烈建议使用枚举类<br>        b.如果枚举类当中只有一个对象，则可以作为单例模式的实现方式<br>        c.定义枚举类：<br>            （1）jdk5.0之前，自定义枚举类<br>                1-声明对象的属性权限为：private final<br>                2-私有化构造器，并给对象属性私有化<br>                3-提供当前枚举类的多个对象</p>
+<pre><code>        （2）jdk5.0，可以使用enum关键字定义枚举类
+            1-提供当前枚举类的对象，多个对象之间用&quot;,&quot;隔开，末尾对象&quot;;&quot;结束
+    d.使用enum关键字定义的枚举类实现接口：当我们需要在调用指定枚举类时进行不同的操作，则在枚举对象后进行重写
+
+常用方法：
+    valueOf()：返回枚举类型的对象数组，该方法可以很方便的遍历所有的枚举值。也可以给其赋值一个字符串，可以索引指定名字的枚举对象，要求字符串必须是枚举对象的&quot;名字&quot;，否则会运行异常
+    toString()：返回当前枚举对象常量名称</code></pre>
+<p>2.注解<br>    说明：<br>        是代码里的特殊标记，这些标记可以在编译、类加载、运行时被读取，并执行相应的处理。可以用于修饰包、类、构造器、方法、成员变量、参数、局部变量的声明，这些信息被保存在Annotation的”name=value”对中</p>
+<pre><code>使用示例：
+    a.使用Annotation时要在前面增加@符号，并把该Annotation当成一个修饰符使用
+    b.在编译时进行格式检查（JDK内置的三个基本注解Override\Deprecated\SuppressWarnings）
+    c.跟踪代码依赖性，实现替代配置文件功能
+    d.spring框架中关于“事务”的管理
+
+自定义注解：自定义注解必须配上注解的信息处理流程(使用反射)才有意义
+    a.定义新的Annotation类型使用@interface关键字
+    b.内部成员，通常使用value表示，可以指定成员的默认值，使用default定义。如果自定义注解没有成员，表示是一个标识作用。
+
+元注解：    
+    说明：用于修饰其他Annotation定义，对现有的注解进行解释说明的注解
+    使用：
+        Retention：只能用于修饰一个Annotation定义，用于指定该Annotation的生命周期---》SOURCE\CLASS(默认行为)\RUNTIME(能通过反射)
+        Target：用于指定被修饰的Annotation能用于修饰哪些程序元素
+        Documented：用于指定那个被盖院Annotation修饰的Annotation类将被javadoc工具提取成文档。默认情况下，javadoc是不包括注解的
+        Inherited：被它修饰的Annotation将具有继承性
+
+jdk8中注解的新特性
+    可重复注解：@Repeatable
+    类型注解：
+        ElementType.TYPE_PARAMETER：表示该注解能写在类型变量的声明语句中（如：泛型声明）
+        ElementType.TYPE_USE：表示该注解能写在使用类型的任何语句中</code></pre>
+<p>###java集合</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/03/27/java%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/" data-id="ckmvqnkxf000484ubgyarfx69" data-title="Java高级编程" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/03/27/java%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/" data-id="ckn722y8r0003okuba4q0g52w" data-title="Java高级编程" class="article-share-link">Share</a>
       
       
       
@@ -212,6 +245,15 @@ Thread类常见的方法：
   
     
 <nav id="article-nav">
+  
+    <a href="/2021/04/06/java%E7%AE%80%E5%8D%95%E7%B1%BB%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java类库与基本操作
+        
+      </div>
+    </a>
   
   
     <a href="/2021/03/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
@@ -241,7 +283,7 @@ Thread类常见的方法：
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li></ul>
     </div>
   </div>
 
@@ -252,6 +294,10 @@ Thread类常见的方法：
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2021/04/06/java%E7%AE%80%E5%8D%95%E7%B1%BB%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/">Java类库与基本操作</a>
+          </li>
         
           <li>
             <a href="/2021/03/27/java%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">Java高级编程</a>
@@ -267,10 +313,6 @@ Thread类常见的方法：
         
           <li>
             <a href="/2021/03/15/algorithm/">algorithm</a>
-          </li>
-        
-          <li>
-            <a href="/2021/03/08/JavaLearing/">(no title)</a>
           </li>
         
       </ul>
