@@ -14,7 +14,7 @@
 <meta property="og:description" content="#简单的类库使用###数字 Math.random():令系统随机选取大于等于0.0且小于1.0的伪随机double值     Math.random()*(n-m)+m：返回指定范围的随机数（m-n之间）的公式  ###字符 string.equals():判断二者是否相同   ###Arrys工具类 Ops:java.util.Arrays Using:     sort():快速排序">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-04-06T06:27:24.916Z">
-<meta property="article:modified_time" content="2021-04-06T13:58:16.959Z">
+<meta property="article:modified_time" content="2021-04-07T06:16:44.704Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -165,8 +165,13 @@ Using:
     （2）elementAt(0)：取出向量中的元素，返回值是Object类型
     （3）size()：计算向量长度 </code></pre>
 <hr>
-<p>###JDK8日期时间API<br>    1.LocalDate\LocalTime\LocalDateTime<br>        实例化：<br>            now(Zoneid zone)：静态方法，根据当前时间创建对象/指定时区的对象<br>            of()：静态方法，根据指定日期/时间创建对象，不存在偏移量</p>
-<pre><code>    使用方法：    
+<p>###JDK8日期时间API</p>
+<pre><code>1.LocalDate\LocalTime\LocalDateTime
+    实例化：
+        now(Zoneid zone)：静态方法，根据当前时间创建对象/指定时区的对象
+        of()：静态方法，根据指定日期/时间创建对象，不存在偏移量
+
+    使用方法：    
         getDayOfMonth()/getDayOfYear()：获得月份太难书(1-31)/获得年份天数(1-366)
         getDayOfWeek()：获取星期几(返回一个DayOfWeek枚举值)
         getMonth()：获得月份，返回一个Month枚举值
@@ -230,16 +235,64 @@ Using:
     TemporalAdjuster：时间校正器。
     TemporalAdjusters：该类通过静态方法(firstDayOfXxx() / lastDayOfXxx() / nextXxx())提供了大量的常用TemporalAdjust的实现</code></pre>
 <hr>
-<p>###java比较器<br>    Comparable接口：自然排序<br>        包：java.lang.Comparable<br>        使用：<br>            1.像String、包装类等实现了Comparable接口，重写了compareTo()方法，给出了比较两个对象的大小，进行从小到大的排序<br>            2.重写compareTo()的规则<br>                当前对象&gt;形参对象，返回正整数，&lt;返回负整数，相等返回0<br>            3.对于自定义类，如果说需要排序，我们可以让自定义类实现Comparable接口，重写compareTo(obj)方法，在CompareTo(obj)方法中指明如何排序</p>
-<pre><code>Comparator接口：定制排序、
+<p>###java比较器</p>
+<pre><code>Comparable接口：自然排序
+    包：java.lang.Comparable
+    使用：
+        1.像String、包装类等实现了Comparable接口，重写了compareTo()方法，给出了比较两个对象的大小，进行从小到大的排序
+        2.重写compareTo()的规则
+            当前对象&gt;形参对象，返回正整数，&lt;返回负整数，相等返回0
+        3.对于自定义类，如果说需要排序，我们可以让自定义类实现Comparable接口，重写compareTo(obj)方法，在CompareTo(obj)方法中指明如何排序
+
+Comparator接口：定制排序、
     包：java.lang.Comparator
     使用：可以使用匿名的方式，重写conpare方法</code></pre>
-<p>###System类<br>    说明：代表系统，系统级的很多属性和控制方法都放置在该类的内部<br>    包：java.lang<br>    使用：<br>        1.该类的构造器为私有的，所以无法创建该类的对象<br>        2.内部成员变量和成员方法都为static<br>    常用方法：<br>        currentTimeMillis()：返回当前的计算机时间<br>        exit(int status)：退出程序，0表示正常退出，非0表示异常退出，使用该方法可以在图形界面编程中实现程序的退出功能<br>        gc()：请求系统进行垃圾回收<br>        getProperty(String key)：获得系统中属性名为key的属性对应的值</p>
-<p>###Math类<br>    说明：提供了一系列静态方法用于科学计算，其方法的参数和返回值类型一般为double型<br>    包：java.lang<br>    常用方法：<br>        abs：绝对值<br>        sqrt：平方值<br>        pow(a,b)：a的b次幂<br>        log：自然对数<br>        exp：e为底指数<br>        random：返回0.0到1.0的随机数<br>        round：将double类型数据转换为long</p>
-<p>###BigInteger类<br>    说明：<br>        可以表示不可变的任意精度的整数，其提供所有Java的基本整数操作符的对应物，并提供java.lang.Math的所有相关方法，还提供：模运算、GCD计算、质数测试、素数生成、位操作以及一些其他操作<br>    包:java.math<br>    使用：<br>        构造器：BigInteger(String val)，根据字符串构建BigInteger对象    </p>
+<p>###System类</p>
+<pre><code>说明：代表系统，系统级的很多属性和控制方法都放置在该类的内部
+包：java.lang
+使用：
+    1.该类的构造器为私有的，所以无法创建该类的对象
+    2.内部成员变量和成员方法都为static
+常用方法：
+    currentTimeMillis()：返回当前的计算机时间
+    exit(int status)：退出程序，0表示正常退出，非0表示异常退出，使用该方法可以在图形界面编程中实现程序的退出功能
+    gc()：请求系统进行垃圾回收
+    getProperty(String key)：获得系统中属性名为key的属性对应的值</code></pre>
+<p>###Math类</p>
+<pre><code>说明：提供了一系列静态方法用于科学计算，其方法的参数和返回值类型一般为double型
+包：java.lang
+常用方法：
+    abs：绝对值
+    sqrt：平方值
+    pow(a,b)：a的b次幂
+    log：自然对数
+    exp：e为底指数
+    random：返回0.0到1.0的随机数
+    round：将double类型数据转换为long</code></pre>
+<p>###BigInteger类</p>
+<pre><code>说明：
+    可以表示不可变的任意精度的整数，其提供所有Java的基本整数操作符的对应物，并提供java.lang.Math的所有相关方法，还提供：模运算、GCD计算、质数测试、素数生成、位操作以及一些其他操作
+包:java.math    
+使用：
+    构造器：BigInteger(String val)，根据字符串构建BigInteger对象    </code></pre>
 <p>###BigDecimal类<br>    说明：表示精度要求比较高的数字，该类支持不可变的、任意精度的有符号十进制定点数<br>    包：java.math<br>    使用：<br>        构造器：BigDecimal(double val/String val)<br>    常用方法：<br>        add：<br>        substract：</p>
-<p>###字符串相关的类<br>    （1）string<br>            特征：<br>                a.不可被继承：String类是一个final类<br>                b.内部定义了final char[] value用于存储字符串数据<br>                c.字符串是支持序列化： String实现了Serializable接口<br>                d.String可以比较大小： 实现了Comparable接口<br>                e.不可变性： String代表不可变的字符序列<br>                    体现：<br>                        1-当对字符串重新赋值时，需要重写指定内存区域赋值，不能使用原有的value进行赋值<br>                        2-当对现有的字符串进行链接操作时，也需要重新指定内存区域赋值<br>                        3-当调用replace()方法修改指定字符或字符串时，也需要重新制定内存区域赋值<br>                f.通过字面量直接赋值(区别于new)的方式给一个字符串复制，此时字符串值生命在方法区的字符串常量池中（字符串常量池中不会存储相同内容的字符串）<br>                g.通过new+构造器方式的方式直接进行实例化，其数据是存储在堆空间中开辟空间以后对应的地址值所指向的常量池<br>                h.常量与常量短的拼接结果在常量池，且常量池中不会存在相同内容的常量，只要其中一个是变量，结果就在堆中</p>
-<pre><code>        JVM中字符串常量池存放位置：
+<p>###字符串相关的类</p>
+<pre><code>（1）string
+        特征：
+            a.不可被继承：String类是一个final类
+            b.内部定义了final char[] value用于存储字符串数据
+            c.字符串是支持序列化： String实现了Serializable接口
+            d.String可以比较大小： 实现了Comparable接口
+            e.不可变性： String代表不可变的字符序列
+                体现：
+                    1-当对字符串重新赋值时，需要重写指定内存区域赋值，不能使用原有的value进行赋值
+                    2-当对现有的字符串进行链接操作时，也需要重新指定内存区域赋值
+                    3-当调用replace()方法修改指定字符或字符串时，也需要重新制定内存区域赋值
+            f.通过字面量直接赋值(区别于new)的方式给一个字符串复制，此时字符串值生命在方法区的字符串常量池中（字符串常量池中不会存储相同内容的字符串）
+            g.通过new+构造器方式的方式直接进行实例化，其数据是存储在堆空间中开辟空间以后对应的地址值所指向的常量池
+            h.常量与常量短的拼接结果在常量池，且常量池中不会存在相同内容的常量，只要其中一个是变量，结果就在堆中
+
+        JVM中字符串常量池存放位置：
             jdk1.6（jdk 6.0 ,java 6.0）：字符串常量池存储在方法区(永久区)
             jdk1.7：字符串常量池存储在堆空间
             jdk1.8：字符串常量池存储在方法区(元空间)
@@ -319,7 +372,8 @@ Using:
                 以上的方法支持方法链操作
                 方法链原理</code></pre>
 <hr>
-<p>###日常使用<br>（1）Eclipse快捷键(可到preference当中的keys进行修改)</p>
+<p>###日常使用</p>
+<p>（1）Eclipse快捷键(可到preference当中的keys进行修改)</p>
 <pre><code>（1）补全代码的声明：alt + /
 （2）快速修复：ctrl + 1
 （3）批量导包：ctrl + shift + o
@@ -355,7 +409,7 @@ Using:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/04/06/java%E7%AE%80%E5%8D%95%E7%B1%BB%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="ckn722y940006okub0eiidpc1" data-title="Java类库与基本操作" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/04/06/java%E7%AE%80%E5%8D%95%E7%B1%BB%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="ckn729vor0006m8ubbbpy6kk4" data-title="Java类库与基本操作" class="article-share-link">Share</a>
       
       
       
