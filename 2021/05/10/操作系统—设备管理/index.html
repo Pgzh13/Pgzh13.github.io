@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>设计模式 | Hexo</title>
+  <title>操作系统——设备管理 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="#设计模式##单例设计模式    描述：采取一定的方法保证在整个的软件系统中，对某个类只能存在一个对象实例，能够减少系统性的开销    实现方法：        1.饿汉式：其是线程安全的，但加载时间相对更长            （1）私有化类的构造器            （2）内部创建类的对象（也必须声明为静态）            （3）提供公共的静态方法，返回类的对象        2">
+  <meta name="description" content="#操作系统##设备管理###磁盘 调度算法：     --先来先服务     --最短寻找时间优先(SSTF)     --扫描算法(SCAN)：只有磁头移动到最外侧磁道的时候才能往内移动，移动到最内侧磁道的时候才能往外移动     --Look调度算法：如果在磁头移动方向上已经没有别的请求，就可以立即改变磁头移动的方向     --循环扫描算法(C-SCAN)：规定只有磁头朝某个特定方向移动时才">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设计模式">
-<meta property="og:url" content="http://example.com/2021/03/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:title" content="操作系统——设备管理">
+<meta property="og:url" content="http://example.com/2021/05/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="#设计模式##单例设计模式    描述：采取一定的方法保证在整个的软件系统中，对某个类只能存在一个对象实例，能够减少系统性的开销    实现方法：        1.饿汉式：其是线程安全的，但加载时间相对更长            （1）私有化类的构造器            （2）内部创建类的对象（也必须声明为静态）            （3）提供公共的静态方法，返回类的对象        2">
+<meta property="og:description" content="#操作系统##设备管理###磁盘 调度算法：     --先来先服务     --最短寻找时间优先(SSTF)     --扫描算法(SCAN)：只有磁头移动到最外侧磁道的时候才能往内移动，移动到最内侧磁道的时候才能往外移动     --Look调度算法：如果在磁头移动方向上已经没有别的请求，就可以立即改变磁头移动的方向     --循环扫描算法(C-SCAN)：规定只有磁头朝某个特定方向移动时才">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-03-22T06:51:03.838Z">
-<meta property="article:modified_time" content="2021-04-29T09:58:29.533Z">
+<meta property="article:published_time" content="2021-05-10T04:14:52.843Z">
+<meta property="article:modified_time" content="2021-05-10T04:14:52.844Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -73,10 +73,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-设计模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-操作系统—设备管理" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/03/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="article-date">
-  <time class="dt-published" datetime="2021-03-22T06:51:03.838Z" itemprop="datePublished">2021-03-22</time>
+    <a href="/2021/05/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/" class="article-date">
+  <time class="dt-published" datetime="2021-05-10T04:14:52.843Z" itemprop="datePublished">2021-05-10</time>
 </a>
     
   </div>
@@ -87,7 +87,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      设计模式
+      操作系统——设备管理
     </h1>
   
 
@@ -95,18 +95,43 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="设计模式"><a href="#设计模式" class="headerlink" title="#设计模式"></a>#设计模式</h2><p>##单例设计模式<br>    描述：采取一定的方法保证在整个的软件系统中，对某个类只能存在一个对象实例，能够减少系统性的开销<br>    实现方法：<br>        1.饿汉式：其是线程安全的，但加载时间相对更长<br>            （1）私有化类的构造器<br>            （2）内部创建类的对象（也必须声明为静态）<br>            （3）提供公共的静态方法，返回类的对象<br>        2.懒汉式：能够延迟对象的创建，但目前是线程不安全的<br>            （1）私有化类的构造器<br>            （2）声明当前类对象，没有初始化（此对象也须声明为static）<br>            （3）声明public、static的返回当前类对象的方法</p>
-<hr>
-<p>##模板方法设计模式<br>    描述：当功能内部一部分实现是确定的，一部分是现实不确定的。这时可以把不确定的部分暴露出去，让子类去实现，这是一种模板模式</p>
-<hr>
-<p>##代理设计模式<br>    描述：代理设计就是为其他对象提供一种代理以控制对这个对象的访问<br>    应用场景：<br>        安全代理：屏蔽对真实角色的直接访问<br>        远程代理：通过代理类处理远程方法调用(RMI)<br>        延迟加载：先加载轻量级的代理对象，真正需要再加载真实对象<br>    分类：<br>        静态代理：静态定义代理类<br>        动态代理：动态生成代理类</p>
-<hr>
-<p>##工厂设计模式<br>    描述：实现了创建者与调用者的分离，即将创建对象的具体过程屏蔽隔离起来，达到提高灵活性的目的</p>
+        <h2 id="操作系统"><a href="#操作系统" class="headerlink" title="#操作系统"></a>#操作系统</h2><h2 id="设备管理"><a href="#设备管理" class="headerlink" title="##设备管理"></a>##设备管理</h2><p>###磁盘</p>
+<pre><code>调度算法：
+    --先来先服务
+    --最短寻找时间优先(SSTF)
+    --扫描算法(SCAN)：只有磁头移动到最外侧磁道的时候才能往内移动，移动到最内侧磁道的时候才能往外移动
+    --Look调度算法：如果在磁头移动方向上已经没有别的请求，就可以立即改变磁头移动的方向
+    --循环扫描算法(C-SCAN)：规定只有磁头朝某个特定方向移动时才处理磁道访问请求，而返回时直接快速移动至起始端而不处理任何请求
+    --C-Look算法：  如果磁头移动的方向上已经没有磁道访问请求了，就可以立即让磁头返回，并且磁头只需要返回到有磁头访问请求的位置即可
+
+减少延迟时间的方法：
+    --交替编号：
+        a.方法：让编号相邻的扇区在物理上不相邻
+        b.原理：读取完一个扇区需要一段事件处理才可以继续读入下一个扇区
+    --错位命名：
+        a.方法：让相邻盘面的山区编号“错误”
+        b.原理：与交替编号方法相同
+
+磁盘地址结构：
+    --采用（柱面号，盘面号、扇区号）的结构
+    --原因：在读取地址连续的磁盘块时，该结构不需要移动磁头
+
+磁盘的管理：
+    --磁盘初始化：
+        a.进行低级格式化(物理格式化)，将磁盘的各个磁道划分为扇区；一个扇区通常可分为头、数据区域、尾三个部分组成
+        b.将磁盘分区，每个分区由若干柱面组成
+        c.进行逻辑格式化，创建文件系统
+
+    --引导块：计算机启动时需要运行初始化程序(自荐程序)来完成初始化
+
+    --坏块：无法正常使用的扇区，属于硬件故障
+        a.简单的逻辑磁盘：逻辑格式化时将坏块标记出来
+        b.复杂的磁盘：磁盘控制器维护一个坏块链，并管理备用扇区</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/03/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="ckoo0iqv1000cl8ub41sn71tp" data-title="设计模式" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/05/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/" data-id="ckoo0iquw0008l8ub0uvihzpn" data-title="操作系统——设备管理" class="article-share-link">Share</a>
       
       
       
@@ -116,19 +141,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2021/03/27/java%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/05/11/java%E7%BC%96%E7%A8%8B%E6%9D%82%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          Java高级编程
+          Java编程杂记
         
       </div>
     </a>
   
   
-    <a href="/2021/03/15/STL/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2021/05/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">STL</div>
+      <div class="article-nav-title">操作系统——文件管理</div>
     </a>
   
 </nav>

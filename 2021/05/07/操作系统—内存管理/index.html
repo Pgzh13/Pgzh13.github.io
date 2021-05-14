@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>操作系统——内存管理 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="#操作系统##内存管理###内存基础知识 说明:是用于存放数据的硬件(程序执行前需要先放到内存中才能被CPU处理)  链接方式：由目标模块生成装入模块，链接后形成完整的逻辑地址      （1）静态链接：在程序运行之前先将各模块及它们所需的库函数连接成一个完整的可执行文件(装入模块)，之后不再拆开     （2）装入时动态链接：将各目标模块装入内存时，边装入边链接的链接方式     （3）运行时动">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统——内存管理">
+<meta property="og:url" content="http://example.com/2021/05/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="#操作系统##内存管理###内存基础知识 说明:是用于存放数据的硬件(程序执行前需要先放到内存中才能被CPU处理)  链接方式：由目标模块生成装入模块，链接后形成完整的逻辑地址      （1）静态链接：在程序运行之前先将各模块及它们所需的库函数连接成一个完整的可执行文件(装入模块)，之后不再拆开     （2）装入时动态链接：将各目标模块装入内存时，边装入边链接的链接方式     （3）运行时动">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-05-07T08:17:30.054Z">
+<meta property="article:modified_time" content="2021-05-07T08:17:30.054Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-操作系统—内存管理" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" class="article-date">
+  <time class="dt-published" datetime="2021-05-07T08:17:30.054Z" itemprop="datePublished">2021-05-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      操作系统——内存管理
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="操作系统"><a href="#操作系统" class="headerlink" title="#操作系统"></a>#操作系统</h2><h2 id="内存管理"><a href="#内存管理" class="headerlink" title="##内存管理"></a>##内存管理</h2><p>###内存基础知识</p>
+<pre><code>说明:是用于存放数据的硬件(程序执行前需要先放到内存中才能被CPU处理)
+
+链接方式：由目标模块生成装入模块，链接后形成完整的逻辑地址
+
+    （1）静态链接：在程序运行之前先将各模块及它们所需的库函数连接成一个完整的可执行文件(装入模块)，之后不再拆开
+    （2）装入时动态链接：将各目标模块装入内存时，边装入边链接的链接方式
+    （3）运行时动态链接：在程序执行中需要该目标模块时，才对它进行链接。
+            优点：便于修改和更新，便于实现对目标模块的共享
+
+装入方式:将装入模块装入内存，装入后形成物理地址
+
+    （1）绝对装入:
+            --实现：编译时产生绝对地址
+                    &lt;!-- 只适用于单道程序环境 --&gt;
+
+    （2）静态重定位(可重定位装入)：
+        --实现：装入时将逻辑地址转换为物理地址
+                &lt;!-- 要求：作业在装入内存时，必须分配其要求的全部内存空间，若空间不足，则不能装入改作业；同时一旦进入内存后，在运行期间就不能在移动，也不能再申请内存空间 --&gt;
+
+    （3）动态重定位(动态运行时装入)：
+        --实现：运行时将逻辑地址转换为物理地址，需设置重定位寄存器
+                    &lt;!-- 重定位寄存器:存放装入模块存放的起始地址 --&gt;
+        --优点：
+            a.可以将程序分配到不连续的存储区中
+            b.程序运行前只需要装入它的部分代码即可投入运行，然后在程序运行期间，根据需要动态申请分配内存
+            c.便于程序段的共享，可以向用户提供一个比存储空间大得多的地址空间</code></pre>
+<hr>
+<p>###内存管理</p>
+<pre><code>管理者：操作系统
+
+功能：
+    （1）内存空间的分配与回收
+
+            --连续分配管理方式：
+                a.说明：指为用户进程分配的必须是一个连续的内存空间
+                b.分类：
+                        &lt;!-- 
+                            内部碎片:分配给某进程的内存区域中,有部分没有使用
+                            外部碎片:是指内存中的某些分区由于太小而难以利用
+                         --&gt;
+                    1-单一连续分配
+                        --分区方式：
+                            1.系统区：通常位于低地址部分，用于存放操作系统相关数据
+                            2.用户区：用于存放用户进程相关数据，内存中只能有一道用户程序，用户程序独占整个用户区空间
+                        --优点：
+                            1.实现简单
+                            2.无外部碎片；
+                            3.可以用覆盖技术扩充内存
+                            4.不一定需要采取内存保护
+                        --缺点：
+                            1.只能用于单用户、单任务的操作系统中
+                            2.有内部碎片
+                            3.存储器利用率低
+
+                    2-固定分区分配
+                        --分区方式：将整个用户空间划分为若干个固定大小的分区，在每个分区中只装入一道作业
+                            &lt;!-- 
+                                对于分区大小相同：适合用于用一台计算机控制多个相同对象的场合,但是缺乏灵活性
+                                对于分区大小不相等：增加了灵活性，可以满足不同大小的进程需求
+                            --&gt;
+                        --优点:实现简单,无外部碎片
+                        --缺点:
+                            1.当用户程序太大时,可能所有分区都不能满足需求,此时不得不采用覆盖技术来解决,但这又会降低性能
+                            2.会产生内部碎片,利用率低
+                        --注意：操作系统需要建立分区说明表，来实现各个分区的分配与回收
+
+                    3-动态分区分配(可变分区分配)
+                        --分区方式:在进程装入内存时,根据进程大小动态地建立分区
+                        --记录内存的数据结构:
+                            1.空闲分区表
+                            2.空闲分区链
+                        --优点:没有内部碎片
+                        --缺点:存在外部碎片,可以使用紧凑技术来解决
+
+                        --动态分区分配算法:
+                            1.首次适应算法:从低地址开始查找,找到第一个满足大小的空闲分区
+                            2.最佳适应算法:优先使用更小的空闲区,空闲分区按容量递增次序链接,每次分配内存时顺序查找空闲分区链/表
+                                &lt;!-- 会产生很多的外部碎片 --&gt;
+                            3.最坏适应算法:优先使用更大的空闲区,空闲区按容量递减次序链接,顺序查找
+                                &lt;!-- 会导致较大的连续空闲区被迅速用完,导致之后&quot;大进程&quot;到达,没有内存分区可以使用 --&gt;
+                            4.邻近适应算法:空闲分区以地址递增的顺序排列,每次分配内存从上次查找结束的位置开始查找
+
+            --非连续分配管理方式
+                a.分类：
+                    1-分页存储管理：
+                        --分区方式：操作系统以页框为单位为各个进程分配内存空间，进程的每个页面分别放入一个页框中，进程的页面与内存的页框有一一对应的关系；各个页面不必连续存放，也不必按先后顺序来
+                            &lt;!-- 
+                                页框（页帧/内存块/物理块）：内存空间所被分为一个个等大的分区，从0开始；页框不能太大，否则可能产生过大的内部碎片
+                                页（页面）：用户进程的地址空间所被分为一个个与页框等大的区域，从0开始
+                                页表：记录进程页面和实际存放内存块之间的对应关系，一个进程对应一张页表，进程的每一页对应一个页表项，每个页表项由“页号”和“块号”组成，每个页表项的长度是相同的，页号是“隐含”的
+                             --&gt;
+                        --逻辑地址结构（以32位为例）：
+                            a.0~11位存放的是页内偏移量
+                            b.12~31位存放的是页号
+
+                        --基地址变换机构：可以借助进程的页表将逻辑地址转换为物理地址
+                            &lt;!-- 快表的结构有效的增加了查询的速度  --&gt;
+
+                    2-分段存储管理：
+                        --分区方式：按照程序自身的逻辑关系划分为若干个段，每个段都有一个段名，每段从0开始编制；内存分配是以段为单位分配，每个段在内存中占据连续空间，但各段之间可以不相邻
+                        --段表：
+                            a.每个段对应一个段表项，其中记录了该段在内存中的起始位置和段的长度
+                            b.各个段表的长度是相同的
+                            c.段号是可以隐含的，不占存储空间
+
+                    3-段页式管理方式：
+                        --分区方式：分段+分页
+                        --逻辑地质结构：段号、页号、页内偏移量
+                        --段表：每个段对应一个段表项，各段表项长度相同，由段号(隐含)、页表长度、页表存放地址组成
+                        --页表：每个页对应一个页表项，各个页表项长度相同，由页号(隐含)、页面存放的内存块号组成
+
+                b.注意：
+                    --分页对用户不可见，分段对用户可见
+                    --分页的地址空间是一维的，分段是二维的
+                    --分段更容易实现信息的共享和保护（纯代码/可重入代码可以共享）
+                    --分页(单级页表)、分段访问一个逻辑地址都需要两侧访问，分段存储中也可以引入快表机构
+
+
+
+
+    （2）对内存空间进行扩充
+
+            --覆盖技术：
+                a.实现：通过对内存设置固定区和覆盖区，对不能被同时访问的程序段共享同一个覆盖区
+                &lt;!-- 缺点：对用户不透明，且需要由程序员声明覆盖结构，增加了用户编程的负担 --&gt;
+
+            --交换技术
+                a.实现：将内存中某些进程暂时换出外存，把外存中某些已具备运行条件的进程换入内存
+                &lt;!-- 
+                    文件区：主要用于存放文件，主要追求存储空间的利用率，因此文件区空间的管理采用离散分配方式
+                    对换区：其空间占磁盘空间的小部分，被换出的进程数据就存放在对换区，对换区采用连续分配方式(主要是为了追求换入换出速度)
+                     --&gt;
+                b.交换条件：通常在许多进程运行且内存吃紧时进行，而系统负荷降低就暂停
+                c.注意：PCB会常驻内存，不会换出外存
+
+            --虚拟存储技术
+                a.实现：虚拟内存的实现要建立在离散分配的内存管理方式基础上
+                    --请求调页(或请求调段)
+                    --页面置换(或段置换)
+                        1-最佳置换算法(OPT)
+                            说明：每次选择淘汰的页面将是以后永不使用，或者在最长时间内不再被访问的页面，可以保证最低的缺页率
+                        2-先进先出置换算法(FIFO)
+                            说明：每次选择淘汰的页面是最早进入内存的页面
+                            特点：实现简单，但算法性能差，会产生Belady异常
+                                &lt;!-- Belady异常：当为进程分配的物理块数增大时，缺页次数不减反增的异常现象 --&gt;
+                        3-最近最久未使用置换算法(LRU)
+                            说明：每次淘汰的页面是最近最久未使用的页面
+                            实现：赋予每个页面对应的页表项中，用访问字段记录该页面上次被访问以来所经历的时间t
+                            特点：性能好，但是实现困难，开销大
+                        4-时钟置换算法(CLOCK)：
+                            实现：为每个页面设置一个访问位，再将内存中的也买你都通过链表指针连接成一个循环队列，当被访问时，其访问位置为1。当需要淘汰一个页面时，只需检查页的访问位。如果是0，就选择该页换出；如果是1，则将其置为0，暂不换出，继续检查下一个页面，若第一轮扫描中所有页面都是1，则将这些页面的访问未依次置为0后，再进行第二轮扫描
+
+                        5-改进型的时钟置换算法
+                            说明：在原来的时间置换算法的基础上，优先淘汰没有修改过的页面，避免I/O操作
+                            实现：增加一个修改位，0表示没有被修改，反之，被修改过
+                            特点：实现简单，算法开销小，性能也不错，但未考虑是否被修改过
+
+                    --页面分配、置换策略
+                        1-驻留集：指请求分页存储管理中给进程分配的物理块的集合
+
+                    --操作：
+                        1-页表机制：在基本分页的基础上增加了状态位、访问字段、修改位、外村地址
+                        2-缺页中断机制：找到页表项后检查页面是否已在内存，若没在则会产生缺页中断
+                            说明：
+                                --将目标页面调入内存，有必要时还要换出页面
+                                --缺页中断属于内中断，属于内中断中的“故障”，即可能被系统修复的异常
+                                --一条指令在执行过程中可能产生多次缺页中断
+
+    （3）实现地址转换（三种装入方式）
+    （4）内存保护
+            --方法：
+                a.在CPU中设置一对上、下限寄存器，存放进程的上、下限地址。进程指令要访问某个地址，CPU检查是否越界
+                b.采用重定位寄存器(基地址寄存器)和界地址寄存器(限长寄存器)进行越界检查。重定位寄存器其中存放的是进程的起始物理地址。界地址寄存器存放的是进程的最大逻辑地址</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/05/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" data-id="ckoo0iquu0007l8ub0bn62m5x" data-title="操作系统——内存管理" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/05/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          操作系统——进程管理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/04/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">操作系统</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/05/14/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%94%E7%89%A9%E7%90%86%E5%B1%82/">计算机网络——物理层</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">计算机网络</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/11/java%E7%BC%96%E7%A8%8B%E6%9D%82%E8%AE%B0/">Java编程杂记</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/">操作系统——设备管理</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">操作系统——文件管理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -4,17 +4,13 @@
   <meta charset="utf-8">
   
   
-  <title>Java高级编程 | Hexo</title>
+  <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="#高级编程##基础知识  1.进程    定义：是程序依次执行过程，或正在运行的一个程序。是一个动态的过程：有它自身的产生、存在和消亡的过程—–生命周期    内容：        （1）进程作为资源分配的单位，系统在运行时回味每个进程分配不同的内存区域  2.线程 定义：是一个程序内部的一条执行路径  内容：     （1）线程作为调度和执行的单位，每个线程拥有独立的运行栈和程序计数器，线程切换">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java高级编程">
-<meta property="og:url" content="http://example.com/2021/03/27/java%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/2/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="#高级编程##基础知识  1.进程    定义：是程序依次执行过程，或正在运行的一个程序。是一个动态的过程：有它自身的产生、存在和消亡的过程—–生命周期    内容：        （1）进程作为资源分配的单位，系统在运行时回味每个进程分配不同的内存区域  2.线程 定义：是一个程序内部的一条执行路径  内容：     （1）线程作为调度和执行的单位，每个线程拥有独立的运行栈和程序计数器，线程切换">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-03-27T14:37:01.185Z">
-<meta property="article:modified_time" content="2021-05-04T06:37:00.900Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -73,7 +69,9 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-java高级编程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main">
+  
+    <article id="post-java高级编程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/03/27/java%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/" class="article-date">
   <time class="dt-published" datetime="2021-03-27T14:37:01.185Z" itemprop="datePublished">2021-03-27</time>
@@ -86,8 +84,8 @@
       <header class="article-header">
         
   
-    <h1 class="p-name article-title" itemprop="headline name">
-      Java高级编程
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/03/27/java%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">Java高级编程</a>
     </h1>
   
 
@@ -688,29 +686,764 @@ java.lang.Class类（对应着加载到内存中的一个运行时类）
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2021/04/06/java%E7%AE%80%E5%8D%95%E7%B1%BB%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Java类库与基本操作
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2021/03/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">设计模式</div>
-    </a>
-  
-</nav>
+</article>
 
+
+
+  
+    <article id="post-设计模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/03/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2021-03-22T06:51:03.838Z" itemprop="datePublished">2021-03-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/03/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="设计模式"><a href="#设计模式" class="headerlink" title="#设计模式"></a>#设计模式</h2><p>##单例设计模式<br>    描述：采取一定的方法保证在整个的软件系统中，对某个类只能存在一个对象实例，能够减少系统性的开销<br>    实现方法：<br>        1.饿汉式：其是线程安全的，但加载时间相对更长<br>            （1）私有化类的构造器<br>            （2）内部创建类的对象（也必须声明为静态）<br>            （3）提供公共的静态方法，返回类的对象<br>        2.懒汉式：能够延迟对象的创建，但目前是线程不安全的<br>            （1）私有化类的构造器<br>            （2）声明当前类对象，没有初始化（此对象也须声明为static）<br>            （3）声明public、static的返回当前类对象的方法</p>
+<hr>
+<p>##模板方法设计模式<br>    描述：当功能内部一部分实现是确定的，一部分是现实不确定的。这时可以把不确定的部分暴露出去，让子类去实现，这是一种模板模式</p>
+<hr>
+<p>##代理设计模式<br>    描述：代理设计就是为其他对象提供一种代理以控制对这个对象的访问<br>    应用场景：<br>        安全代理：屏蔽对真实角色的直接访问<br>        远程代理：通过代理类处理远程方法调用(RMI)<br>        延迟加载：先加载轻量级的代理对象，真正需要再加载真实对象<br>    分类：<br>        静态代理：静态定义代理类<br>        动态代理：动态生成代理类</p>
+<hr>
+<p>##工厂设计模式<br>    描述：实现了创建者与调用者的分离，即将创建对象的具体过程屏蔽隔离起来，达到提高灵活性的目的</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/03/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="ckoo0iqv1000cl8ub41sn71tp" data-title="设计模式" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
   
 </article>
 
+
+
+  
+    <article id="post-STL" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/03/15/STL/" class="article-date">
+  <time class="dt-published" datetime="2021-03-15T12:07:43.502Z" itemprop="datePublished">2021-03-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/03/15/STL/">STL</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="STL"><a href="#STL" class="headerlink" title="#STL"></a>#STL</h2><h2 id="stl的使用"><a href="#stl的使用" class="headerlink" title="##stl的使用"></a>##stl的使用</h2><p>###pair的使用</p>
+<pre><code>定义：
+    （1）pair&lt;数据类型,数据类型&gt; p;
+    （2）pair&lt;int,int&gt; p(1,5),直接初始化其内容
+    （3）pair&lt;int,int&gt; p[maxnum]，定义了一个pair类型数组
+
+访问：
+    通过first与second访问其前后的内容
+使用：
+    （1）向pair数组里面插入值
+        （a）map&lt;int,int&gt; mp;
+            mp.insert(make_pair(1,2));
+        （b）pair&lt;int,int&gt; p[maxnum];
+            p[i]=&#123;1,2&#125;;
+注意：可以直接使用关系运算符进行比较，当first相同时会通过判别second的大小来比较</code></pre>
+<hr>
+<p>###set的使用</p>
+<pre><code>说明：
+    （1）是一种包含已排序对象的关联容器，set集合容器实现了红黑树的平衡二叉搜索树的数据结构，在插入元素时，会自动调整二叉树的排序，把元素放到适当的位置，他不会插入相同键值的元素，而采取忽略处理
+    （2）平衡二叉树的检索使用中序遍历算法，检索效率高于vector\deque\list等容器
+    （3）对于该容器中的简直，不可直接去修改，应该先删除该键值，再插入新的键值
+    （4）不提供直接存取元素的任何操作函数，只能通过迭代器进行间接存区，而且从迭代器角度来看，元素值是常数
+    （5）元素比较动作只能用于型别相同的容器(即元素和排序准则必须相同)
+
+常用方法：
+    begin()：返回指向第一个元素的迭代器
+    clear()：清除所有元素
+    count()：返回某个值元素的个数
+    end()：返回指向最后一个元素下一个位置的迭代器
+    equal_range()：返回集合中与给定值相等的上下限的两个迭代器
+    erase()：删除集合中的元素 find()：返回一个指向被查找到元素的迭代器 get_allocator()：返回集合的分配器
+    insert()：在集合中插入元素 lower_bound()：返回指向大于（或等于）某值的第一个元素的迭代器
+    key_comp()：返回一个用于元素间值比较的函数 max_size()：返回集合能容纳的元素的最大限值
+    rbegin()：返回指向集合中最后一个元素的反向迭代器 rend()：返回指向集合中第一个元素的反向迭代器 size()：集合中元素的数目
+    swap()：交换两个集合变量 upper_bound()：返回大于某个值元素的迭代器 value_comp()：返回一个用于比较元素间的值的函数</code></pre>
+<p>###其他函数</p>
+<p>iterator unique(iterator it_1,iterator it_2)：元素去重(删除相邻的重复元素(只保留一个))<br>    说明：其去重过程实际上就是不停的把后面不重复的元素移到起那面，即使用不重复的元素占领重读元素的位置，容器的长度并没有发生变化</p>
+<p>lower_bound(iteraror it_1,iterator it_2,x)：返回指向a中第一个大于/等于x的元素迭代器<br>upper_bound(iteraror it_1,iterator it_2,x)：返回指向a中第一个大于x的元素迭代器<br>    注意：it_1到it_2之间的区域需要为一个元素(从小到大)排列的vector的一部分，若添加compare函数找小于等于或小于x的元素，则需要时从大到小的顺序</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/03/15/STL/" data-id="ckoo0iqug0001l8ubb0z56vzs" data-title="STL" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-algorithm" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/03/15/algorithm/" class="article-date">
+  <time class="dt-published" datetime="2021-03-15T12:05:55.901Z" itemprop="datePublished">2021-03-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/03/15/algorithm/">algorithm</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="algorithm"><a href="#algorithm" class="headerlink" title="#algorithm"></a>#algorithm</h2><h2 id="算法学习"><a href="#算法学习" class="headerlink" title="##算法学习"></a>##算法学习</h2><p>###快速排序</p>
+<pre><code>void quickSort(vector&lt;int&gt;&amp; arr,int left,int right)&#123;
+
+    if(left&gt;=right)
+        return;
+    &lt;!--确定目标数与比较数的位置--&gt;
+    int oldLeft = left,oldRight = right;
+
+    &lt;!-- 用于记录序列是否排序完毕 --&gt;
+    bool judge = true;
+    int    target = arr[left];
+
+    &lt;!-- 通过左右往返比较，确定目标值在序列当中的位置 --&gt;
+    while(left&lt;right)&#123;
+        while(left&lt;right &amp;&amp; arr[right]&gt;=target)&#123;
+            right--;
+            judge=false;
+        &#125;
+        arr[left] = arr[right];
+
+        while(left&lt;right &amp;&amp; arr[left]&lt;=target)&#123;
+            left++;
+            judge=false;
+        &#125;
+        arr[right] = arr[left];
+    &#125;
+    arr[left] = target;
+
+    &lt;!-- 将目标数左右两侧的序列分开进行排序 --&gt;
+    if(!judge)&#123;
+        quickSort(arr,oldLeft,left-1);
+        quickSort(arr,left+1,oldRight);
+    &#125;
+    return ;
+&#125;</code></pre>
+<hr>
+<p>###堆排序</p>
+<pre><code>void adjustPos(vector&lt;int&gt;&amp; args,int markPos,int size)
+&#123;
+    &lt;!-- 左右叶节点  --&gt;
+    int left = 2*markPos+1;
+    int right = 2*markPos+2;
+
+    &lt;!-- 记录最值位置，比较左右结点与根节点的大小  --&gt;
+    int maxNums=markPos;
+    if(left&lt;size &amp;&amp; args[left]&gt;args[maxNums])
+        maxNums = left;
+    if(right&lt;size &amp;&amp; args[right]&gt;args[maxNums])
+        maxNums = right;
+    if(maxNums!=markPos)&#123;
+        swap(args[maxNums],args[markPos]);    
+        adjustPos(args,maxNums,size);
+    &#125;
+    return ;
+&#125;
+void heapSort(vector&lt;int&gt;&amp; args)&#123;
+    int markNode=args.size()/2-1;        &lt;!-- 最后一个非叶子节点位置 --&gt; 
+
+    &lt;!-- 通过遍历非叶子结点，将其构造成大顶堆（升序）/小顶堆（降序） --&gt; 
+    for(int i=markNode;i&gt;=0;i--)&#123;
+        adjustPos(args,i,args.size());
+    &#125;
+
+    &lt;!-- 每次得到根节点为最大值  --&gt;
+    for(int i=args.size()-1;i&gt;=1;i--)&#123;
+        swap(args[i],args[0]);
+        adjustPos(args,0,i);
+    &#125;
+    return ;
+&#125;</code></pre>
+<p>###哈希表</p>
+<p>###优先队列</p>
+<pre><code>功能：在优先队列中，元素被赋予优先级，当访问元素时，具有最高优先级的元素最先删除。优先队列具有最高级先出的行为特征
+
+实现：
+    class prorityQueue&#123;
+        public:
+            prorityQueue()&#123;
+
+            &#125;
+            &lt;!-- 对于基本类型的大/小顶堆  --&gt;
+            void bigTopPile()&#123;
+                &lt;!-- 等同于priority_queue&lt;int,vector&lt;int&gt;,less&lt;int&gt; &gt; a
+                若要其置成小顶堆则
+                    priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; --&gt;
+                priority_queue&lt;int&gt; a;          
+                int s=0;
+                while(cin&gt;&gt;s)&#123;
+                    a.push(s);
+                &#125;
+                while(!a.empty())&#123;
+                    cout&lt;&lt;a.top()&lt;&lt;&quot; &quot;;
+                    a.pop();
+                &#125;
+                return ;
+            &#125;
+
+            &lt;!-- 使用pair做优先队列元素，先比较第一个元素，第一个相等比较第二个 --&gt;
+            void pairPriorityQueue(int nums)&#123;
+                priority_queue&lt;pair&lt;int,string&gt; &gt; pq;
+                int pos;
+                string posStr;
+                pair&lt;int,string&gt; p1[nums];
+                int i=0;
+                while(cin&gt;&gt;pos&gt;&gt;posStr)&#123;
+                    p1[i]=&#123;pos,posStr&#125;;
+                    pq.push(p1[i]);
+                    i++;
+                &#125;
+                while(!pq.empty())&#123;
+                    cout&lt;&lt;pq.top().first&lt;&lt;&quot; &quot;&lt;&lt;pq.top().second&lt;&lt;endl;
+                    pq.pop();
+                &#125;
+                return ;
+
+            &lt;!-- 用自定义的类型做优先队列元素 --&gt;
+
+            &#125;
+    &#125;;</code></pre>
+<p>###并查集</p>
+<pre><code>作用：主要可以用于解决一些元素分组的问题，管理一系列不相交的集合
+功能：
+    （1）合并：把两个不相交的集合合并为一个集合
+    （2）查询：查询两个元素是否在同一个集合中
+实现：
+    MergeQurey()&#123;
+        nums=0;
+        &lt;!-- 使用两个数组分别来记录当前点所连接的根节点，以及当前节点深度 --&gt;
+        vector&lt;int&gt; t1(10001,0),t2(10000,1);
+        pre = t1;
+        rank = t2;
+        for(int i=0;i&lt;10001;i++)
+            pre[i]=i;
+    &#125;
+    &lt;!-- 用于搜寻当前结点的根节点 --&gt;
+    int find(int j)&#123;
+        if(pre[j] == j)
+            return j;
+        else
+            return find(pre[j]);
+    &#125;
+    &lt;!-- 合并两个节点,比较两个节点的深度,尽量由深度短的节点,指向深度深的节点,减少节点长度,降低搜寻长度 --&gt;
+    void orderMerge(int i,int j)&#123;
+        int x= find(i),y = find(j);
+        if(rank[x] &lt;= rank[y])&#123;
+            pre[x] = y;
+        &#125;else&#123;
+            pre[y] = x;
+        &#125;
+        &lt;!-- 当两个节点深度相同，则二者相连 --&gt;
+        if(rank[x] == rank[y] &amp;&amp; x!=y)
+            rank[y]++; 
+    &#125;</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/03/15/algorithm/" data-id="ckoo0iquj0002l8ubdges8ous" data-title="algorithm" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-JavaLearing" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/03/08/JavaLearing/" class="article-date">
+  <time class="dt-published" datetime="2021-03-08T06:43:23.566Z" itemprop="datePublished">2021-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: JavaLearing<br>tags: </p>
+<hr>
+<h2 id="Java学习"><a href="#Java学习" class="headerlink" title="#Java学习"></a>#Java学习</h2><p>##编程基础</p>
+<hr>
+<p>###基础知识杂记<br>1.进制转换</p>
+<pre><code>二进制：0b开头
+八进制：0开头
+十六进制：0x开头</code></pre>
+<p>2.运算符<br>    位运算符：</p>
+<pre><code>    操作的都为整型数据
+    右移运算符根据最高位的数来补充（&gt;&gt;&gt;都用0补）
+    ~：正(负)数取反，各二进制码按补码各位取反
+    运算符优先级：</code></pre>
+<p>3.Scanner</p>
+<pre><code>包：java.util.Scanner
+对象生成：Scanner scanner = new Scanner(System.in);
+
+int型数据：nextInt()
+double型数据：nextDouble()
+float型数据：nextFloat()
+boolean型数据：nextBoolean()
+char型数据：Scanner没有提供相关的方法，只能通过获取一个字符串，再通过String当中的charAt()获取
+
+注意：需要根据相应的方法来输入指定类型的值，如果输入的数据类型与要求的类型不匹配时，会报异常</code></pre>
+<p>4.条件转换语句</p>
+<pre><code>switch结构中的表达式所允许的数据类型：
+    byte、short、char、int、枚举类型（JDK5.0新增）、String类型（JDK7.0新增）</code></pre>
+<p>5.可变个数形参(jdk5.0新增的内容)</p>
+<pre><code>格式：数据类型 ... 变量名
+使用：其性质与数组相同
+注意：
+    (1)    则其与本类名中方法名相同，形参类型也相同的数组之间不构成重载，二者不能共存
+    (2)    在形参当中使用，必须声明在末尾
+    (3)    最多只能声明一个可变形参</code></pre>
+<p>6.Java中的参数传递机制：值传递</p>
+<pre><code>如果参数是基本数据类型，此时实参赋给形参的是实参的真实存储的数据值
+如果参数是引用数据类型，此时实参赋给形参的是实参存储数据的地址值 </code></pre>
+<hr>
+<p>###面向对象（程序设计要求高内聚、 低耦合）</p>
+<p>1.对象的内存解析：</p>
+<pre><code>堆：所有的对象实例以及数组都要在堆上分配
+栈（虚拟机栈）：用于存储局部变量等
+方法区：用于存储已被虚拟机加载的类信息、常量、静态、变量、即使编译器编译后的代码等数据
+类属性：在内存当中加载到堆空间中
+局部变量：在内存当中加载到栈空间中</code></pre>
+<p>2.封装性：</p>
+<pre><code>访问权限：用于修饰类以及类的内部结构：属性、方法、构造器、内部类
+    (1)    private：类内部
+    (2)    default（缺省）：private + 同一个包 
+    (3)    protected：default + 不同包的子类
+    (4)    public：proctected + 同一个工程
+    注意：对于class的权限修饰只可以用public和default，public类可以在任意地方被访问，default类只可以被同一个包内部的类访问</code></pre>
+<p>3.继承性：</p>
+<pre><code>格式：class A extends B（子类A继承父类B后，子类A中就获取了父类B中声明的结构、属性和方法 ）
+        A:子类、派生类、subclass
+        B:父类、超类、基类、superclass
+
+使用：
+    （1）一个类只能有一个父类，java中的单继承性 
+    （2）一个父类可以派生出多个子类
+    （3）子父类是相对的
+    （4）子类继承父类以后，就获取了直接父类以及所有间接父类中声明的属性和方法
+
+注意：
+    （1）父类中声明为private的属性或方法，子类继承父类以后，仍然认为获取了父类中私 有的结构，只因为封装性的影响，使得子类不能直接调用父类的结构
+    （2）如果没有显示的声明一个类的父类，则此类继承于java.lang.Object类（注：所有的java类，处java.lang.Object类之外，都直接或简介的继承于java.lang,Object类，也就意味着，所有Java类具有java.lang.Object类生命的功能）</code></pre>
+<p>4.多态性：父类的引用指向子类的对象</p>
+<pre><code>使用：
+    （1）虚拟方法调用：子类中定义了伊夫雷同名同参数的方法，在多态情况下，将此时父类的方法成为虚拟方法，父类根据赋值给他的不同子类对象，动态调用属于子类的该方法。这样的方法调用在编译期时无法确定的
+    （2）有了对象多态性以后，在编译期中，我们只能调用父类中声明的方法，但在运行期，实际执行的时子类重写父类的方法
+    （3）对象的多态性只适用于方法， 不适用于属性
+    （4）使用对象的多态性时，内存实际上是加载了子类特有的属性和方法，但是由于变量声明为父类类型，导致编译时，只能调用父类中声明的属性和方法，子类特有的属性和方法不能调用
+    （5）可以使用强制类型转换向下转型，赋给子类对象（注意：使用强制类型转换，可能会出现ClassCastException异常，我们可以使用instanceof关键字进行判断）</code></pre>
+<p>5.方法的重写（override/overwrite）：</p>
+<pre><code>功能：重写后，当创建子类对象以后，通过子类对象调用子父类中的同名同参数的方法时，实际执行的时子类重写父类的方法，进行覆盖操作
+规定：
+    （1）子类重写方法的权限修饰符不小父类被重写的方法的权限修饰符
+    （2）返回值类型
+        父类为void--------&gt;子类void
+        父类为A类型-------&gt;子类为A类或A类的子类
+        父类为基本数据类型---------&gt;子类为相同的基本数据类型
+    （3）子类重写的方法抛出异常 类型不大于父类被重写的方法抛出的异常类型
+注意：子类不能重写父类中声明为private的方法</code></pre>
+<p>6.子类对象实例化的全过程</p>
+<pre><code>（1）从结果上看：（继承性）
+    子类继承父类够，就获取了父类中声明的属性或方法
+    创建子类对象，在堆空间中就会加载所有父类中生命的属性
+（2）从过程上看：
+    当我们通过子类的构造器创建子类对象时，一定会直接或间接的调用其父类的构造器，进而调用父类的父类构造器，直到调用了java.lang,Object类中的空参的构造器为止。因此我们才可以看到内存中有父类的结构，子类对象才可以考虑进行调用</code></pre>
+<p>7.关键字</p>
+<pre><code>this关键字：
+    功能：用来修饰属性、方法、构造器，可以理解为当前对象或当前正在创建的对象
+    使用：
+        在类的构造器和方法中我们可以使用“this.属性”或“this.方法”的方式，来调用当前正在创建的对象属性或方法/已存在的对象属性或方法，同时我们可以通过使用“this（形参列表）”的方式，来调用本类中指定的其他构造器，但是不能调用自己这个构造器 
+
+
+package关键字：
+    功能：为了更好的实现项目中类的管理
+    使用：
+        （1）使用其声明类或接口所属的包，声明在源文件的首行
+        （2）属性名中每“.”一次，代表一层文件目录
+        （3）同一个包下，不能命名同名的接口或类
+
+import关键字：
+    功能：在源文件中显式的使用import结构导入指定包下的类、接口 
+    使用： 
+        （1）声明在包的声明和类的声明之间
+        （2）使用“xxx.*”的方式，表示可以导入xxx包下的所有结构
+        （3）如果使用的类或接口是java.lang包下定义的或者是在本包下定义的，则可以省略import结构
+        （4）如果在源文件中，使用了不同包下的同名类，则必须至少有一个需要以全类名的方式显示
+        （5）使用“xxx.*”方式表明可以调用xxx包下的所有结构，但是如果使用的是xxx子包下的结构，则仍需导入 
+        （6）import static：导入指定类或接口中的静态结构
+
+super关键字（可以理解为父类的）
+    功能：
+        （1）可以在子类的方法或构造器当中，通过使用“super.属性”或“super.方法”的方式，显式的调用父类中声明的属性或方法，但是通常对其进行省略
+        （2）当子类和父类中定义了同名的属性时，想要在子类当中调用父类中声明的属性，则必须显式的使用“super.属性”的方法，表明调用的时父类中声明的属性
+        （3）当子类重写了父类中的方法后，若是需要在子类当中调用父类的方法时，则必须显式的使用“super.方法”的方式，表明调用的是父类被重写的方法
+        （4）可以在子类的构造器中显式的使用“super(形参列表)”的方法调用父类中声明的指定构造器（注意：必须声明在子类构造器的首行，同时对于this(形参列表)或super(形参列表)，二者不能同时出现）
+        （5）在构造器的首行中，没有显式的声明“this(形参列表)”或“super(形参列表)”，则默认调用的是父类中空参的构造器
+        （6）在类的多个构造器中，至少有一个类的构造器实用了“super(形参)”，调用父类中的构造器
+
+instanceof关键字
+    功能：判断指定对象是否是指定类的实例
+    格式：a instanceof A（a对象 A类）
+
+static关键字：
+    功能：静态的，可以用来修饰属性、方法、代码块、内部类
+    使用：
+        （1）属性：是否使用static修饰，分为静态属性(类变量)和非静态属性(实例变量)
+                实例变量：所创建的每个对象都独立拥有一套类中的非静态属性
+                静态变量：所创建的多个对象都共享一个静态变量，当通过某一个对象修改静态变量时，会导致其他对象调用此静态变量时，进行了修改。同时，静态变量随着类的加载而加载，其加载要早于对象的创建，则可以通过 “ 类.静态变量 ” 的方式来进行调用
+        （2）方法：其使用方法与属性一致
+                注意：
+                    a.在静态方法中，只能调用静态的方法或属性
+                    b.在静态方法中，不可以使用this关键字、super关键字
+
+final关键字：
+    功能：可以用来修饰类、方法、变量
+    使用：
+        （1）用来修饰类，此类不能被其他类所继承
+        （2）用来修饰方法，表明此方法不能被重写
+        （3）用来修饰变量，此时变量称为“常量 ”，其赋值的位置有显式初始化、代码块中初始化、构造器中初始化。当使用final修饰形参时，表明此形参是一个常量，当我们调用此方法时，给常量形参赋一个实参，一旦赋值以后，就只呢在方法体内使用此形参，但不能进行重新赋值
+        （4）static final用来修饰属性：全局常量
+
+abstract关键字： 
+    功能：可以用来修饰的类和方法 
+    使用：
+        修饰对象为类： 
+            （1）此类不能实例化
+            （2）此类中一定有构造器，便于子类实例化时调用（因此，在开发中都会提供抽象类的子类，让子类对象完成实例化，完成相关操作） 
+        修饰对象为方法：
+            （1）抽象方法只有方法的声明，没有方法体 
+            （2）包含抽象方法的类，一定是个抽象类，而抽象类中可以没有抽象方法
+            （3）若子类重写了父类中的所有抽象方法后，此子类方可实例化，若没有重写完父类中所有的抽象方法，此子类也是一个抽象类，需要使用abstract修饰 
+    注意：
+        （1）不能用来修饰属性、构造器等结构 
+        （2）不能用来修饰私有方法、静态方法、final方法、final类
+
+mian()方法
+    功能： 
+        （1）作为程序的入口
+        （2）一个普通的静态方法
+        （3）可以作为与控制台交互的方式 </code></pre>
+<p>8.代码块（初始化块）</p>
+<pre><code> 作用：用来初始化类、对象
+ 使用：
+     （1）代码块如果有修饰的话，只能使用static
+     （2）对于静态代码块：初始化类的信息 
+             a.内部可以有输出语句
+             b.随着类的加载而执行，而且只会执行一次
+             c.如果类中定义了多个静态代码块，则按照声明的先后顺序执行
+             d.只能调用静态结构
+         对于非静态代码块：可以在创建对象时，对对象的等进行初始化
+             a.内部可以有输出语句
+             b.随着对象的创建而执行，每创建一次对象执行一次
+             c.按照声明的先后顺序执行</code></pre>
+<p>9.接口(interface)：Java中，接口和类是并列的两个结构</p>
+<pre><code>使用：
+    （1）在JDK7及以前：只能定义全局常量(public static final)和抽象方法(public abstract)，在JDK8以后：增加定义静态方法、默认方法
+    （2）接口中不能定义构造器，意味着其不能实例化
+    （3）Java开发中，接口通过让类去实现(implements)的方式来使用实例化，如果实现类覆盖了接口中所有的抽象方法，则实现类就可以实例化，若没有完全覆盖，则仍为抽象类
+    （4）Java类中可以实现多个接口（弥补Java当中单继承性的局限性）
+        格式：class AA extends BB implements CC,DD
+    （5）接口与接口之间可以继承，而且可以多继承
+    （6）接口中定义的静态方法，只能通过接口来调用
+    （7）通过实现类的对象，可以调用接口中的默认方法。如果实现类重写了接口中的默认方法，调用时，仍然调用的是重写以后的方法
+    （8）对于方法的类优先原则：如果子类(或实现类)继承的父类和实现的接口中声明了同名同参数的方法，那么子类再没有重写此方法的情况下，默认调用的是父类中的同名同参数的方法
+    （9）接口冲突：在实现类实现了多个接口，而这多个接口中定义了同名同参数的默认方法，那么实现类没有重写此方法的情况下，会报错。解决接口冲突则需在实现类当中重写此方法
+    （10）在子类(或实现类)的方法当中调用父类、接口被重写的方法
+            自己重写的方法：use();
+            父类中声明的方法：super.use();
+            接口中的默认方法：XXX.super.use()</code></pre>
+<p>10.内部类</p>
+<pre><code>描述：在Java中，允许一个类的定义位于另一个类的内部，前者称为内部类，后者称为外部类
+分类：
+    （1）成员内部类(静态、非静态)：
+        a.作为一个类：
+            类内可以定义属性、方法、构造器等
+            可以被final修饰，表示此类不能被继承
+            可以被abstract修饰
+        b.作为外部类的成员：
+            可以调用外部类的结构
+            可以被static修饰
+            可以被4种不同的权限修饰
+
+    （2）局部内部类(方法内、代码块内、构造器内)：在局部内部类的方法中，如果调用及局部内部类所声明的方法中的局部变量，要求此局部变量声明为final
+使用：
+    （1）实例化成员内部类对象
+        example ：Person.Bird bird = new p.Bird()</code></pre>
+<hr>
+<p>###异常处理(抓抛模型)</p>
+<pre><code>方法：
+    （1）try-catch-finally：
+            使用：
+                try&#123;
+                    可能出现异常的代码
+                &#125;catch(异常类型1 变量名1)&#123;
+                    处理异常的方式
+                &#125;
+                ....
+                finally&#123;
+                    一定会被执行的代码(即使catch当中出现异常，或try当中出现return语句)
+                &#125;
+
+        注意：
+            a.finally是可选的
+            b.catch中的若异常类型如果满足子父类关系，则要求子类一定声明在父类上面。否则，报错。
+            c.使用该异常处理方式，处理编译时异常，使得程序在编译时就不再报错，但是运行时仍可能报错
+            d.开发中，由于运行时异常比较常见，所以通常不针对运行时异常编写 方法来处理
+
+    （2）throws+异常类型：
+            使用：
+                （1）写在方法的声明处，指明方法执行时，可能会抛出的异常类型。一旦方法体执行时出现异常，仍会在异常代码处生成一个异常类的对象，此对象满足throws后异常类型时，就会被抛出。异常代码后续的代码就不再执行
+                （2）如果父类中被重写的方法没有throws方式处理异常，则子类重写的方法也不能使用throws
+
+    （3）throw关键字：通过throw new 异常类的方法，从而可以手动生成异常对象，声明在方法体内
+
+    （4）自定义异常类
+            使用：
+                （1）继承与现有的异常结构：RuntimeExeption\Exception
+                （2）提供全局常量：serialVersionUID
+                （3）提供重载的构造器</code></pre>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/03/08/JavaLearing/" data-id="ckoo0iqu30000l8ub7dpw6y5a" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-后端开发路线" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/03/01/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF/" class="article-date">
+  <time class="dt-published" datetime="2021-03-01T09:14:16.000Z" itemprop="datePublished">2021-03-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/03/01/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF/">后端开发路线</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="后端开发路线"><a href="#后端开发路线" class="headerlink" title="#后端开发路线"></a>#后端开发路线</h2><p>##编程基础</p>
+<hr>
+<p>###Java语言</p>
+<p>1.语言基础：</p>
+<pre><code>基础语法    面向对象    接口    容器    异常    泛型    反射        注释        I/O</code></pre>
+<p>2.JVM虚拟机：</p>
+<pre><code>类加载机制
+字节码执行机制
+JVM内存模型
+GC垃圾回收
+JVM性能监控与故障定位
+JVM调优</code></pre>
+<p>3.多线程/并发：</p>
+<pre><code>并发编程基的基础
+线程池
+锁
+并发容器
+源子类
+JUC并发工具类</code></pre>
+<hr>
+<p>###数据结构和算法</p>
+<hr>
+<p>###计算机网络</p>
+<pre><code>1.ARP协议
+2.IP协议、ICMP协议
+3.TCP、UDP协议
+4.DNS/HTTP/HTTPS协议
+5.session/Cookie</code></pre>
+<hr>
+<p>###SQL/数据库</p>
+<pre><code>1.SQL语句的书写
+2.SQL语句的优化
+3.事务、隔离级别
+4.索引</code></pre>
+<hr>
+<p>###操作系统</p>
+<pre><code>1.进程、线程
+2.并发、锁
+3.内存管理和调度
+4.I/O原理</code></pre>
+<hr>
+<p>###设计模式：<br>    单例    工厂    代理    策略    模板方法    观察者    适配器    责任链    建造者</p>
+<hr>
+<p>##应用框架</p>
+<hr>
+<p>###Spring家族框架</p>
+<p>1.Sprng</p>
+<pre><code>IoC AOP</code></pre>
+<p>2.SPringMVC</p>
+<p>3.Spring Boot</p>
+<pre><code>自动适配、开箱即用
+整合Web
+整合数据库（事务问题）
+整合权限：
+    Shiro\Spring Security</code></pre>
+<p>4.整合各种中间件</p>
+<pre><code>Redius    MQ    RPC框架    NIO框架</code></pre>
+<hr>
+<p>###服务器软件<br>1.web服务器</p>
+<pre><code>Nginx</code></pre>
+<p>2.应用服务器</p>
+<pre><code>Tomcat    Jetty    Undertow</code></pre>
+<p>3.中间件</p>
+<pre><code>缓存：
+    Redis：
+        5大基础数据类型    事务        管道        持久化    集群
+
+消息队列：
+    RocketMQ    RabbitMQ    Kafa
+
+RPC框架：
+    Dubbo    gRPC    Thrift    Spring-Cloud    Netty</code></pre>
+<p>4.数据库框架</p>
+<pre><code>ORM层框架：
+    Mybatis    Hibermate    JPA
+
+连接池：
+    Druid    HikariCP    C3P0
+
+分库分表：
+    MyCAT    Sharding-JDBC    Shardin-Sphere</code></pre>
+<p>5.搜索引擎</p>
+<pre><code>ElasticSearch    Soir</code></pre>
+<p>6.分布式/微服务</p>
+<pre><code>服务发现/注册：
+    Eureka    Consul    Zookeeper    Nacos
+
+网关：
+    Zuui    Gateway
+
+服务调用
+    Ribbon    Feign</code></pre>
+<p>7.熔断/降级</p>
+<pre><code>Hystrix</code></pre>
+<p>8.配置中心</p>
+<pre><code>Config    Apollp    Nacos</code></pre>
+<p>9.认证/鉴权</p>
+<pre><code>Spring-Security    OAuth2    SSO单点登录</code></pre>
+<p>10.分布式事务</p>
+<pre><code>JTA接口：
+    Atomiikos组件
+
+2PC/3PC
+XA模式
+
+TCC模式：
+    tcc-transaction    ByteTCC    EasyTransaction    Seata
+
+SAGA模式：
+    ServiceComb    Seate
+
+LCN模式：
+    tx-lcn</code></pre>
+<p>11.任务调度</p>
+<pre><code>Quartz    Elastic-Job</code></pre>
+<p>12.链路追踪和监控</p>
+<pre><code>Zipkin    Sleuth    Skywalking</code></pre>
+<p>13.日志分析和监控</p>
+<pre><code>ELK：
+    ElasticSearch    Logstash    Kibana</code></pre>
+<p>###虚拟化/容器化</p>
+<p>1.容器技术</p>
+<pre><code>Docker</code></pre>
+<p>2.容器编排技术</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/03/01/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF/" data-id="ckoo0iquq0005l8ub291wbqjg" data-title="后端开发路线" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
 
 </section>
         
