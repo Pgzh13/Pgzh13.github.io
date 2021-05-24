@@ -71,6 +71,627 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-计算机网络—网络层" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%94%E7%BD%91%E7%BB%9C%E5%B1%82/" class="article-date">
+  <time class="dt-published" datetime="2021-05-20T13:00:51.792Z" itemprop="datePublished">2021-05-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/05/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%94%E7%BD%91%E7%BB%9C%E5%B1%82/">计算机网络——网络层</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="计算机网络"><a href="#计算机网络" class="headerlink" title="#计算机网络"></a>#计算机网络</h2><h2 id="网络层"><a href="#网络层" class="headerlink" title="##网络层"></a>##网络层</h2><p>###基本概念</p>
+<pre><code>--说明：主要任务是把分组从源端传到目的端，为分组交换网上的不同主机提供通信服务；传输单位是数据报
+
+--功能：
+    a.路由选择和分组转发
+    b.异构网络互联
+    c.拥塞控制
+
+--基础概念：
+    a.数据报：网络层的传输单位
+
+    b.分组：把大的数据块分割成小的数据块
+
+    c.报文：源应用发送的信息整体</code></pre>
+<p>###数据交换</p>
+<pre><code>--电路交换：
+    a.特点：
+        1-独占资源
+    b.优点
+        1-通信时延小
+        2-有序传输
+        3-没有冲突
+        4-实时性强
+    c.缺点：
+        1-建立连接时间长
+        2-线路独占，使用效率低
+        3-灵活性差
+        4-无差错控制能力
+
+--报文交换：
+    a.报文：源应用发送的信息整体
+    b.优点：
+        1-无需建立连接
+        2-存储转发，动态分配线路
+        3-线路可靠性较高
+        4-线路利用率较高
+        5-多目标服务
+    c.缺点：
+        1-有存储转发时延
+        2-报文大小补丁，需要网络节点有较大缓存空间
+
+--分组交换：
+    a.优点：
+        1-无需建立连接
+        2-存储转发，动态分配线路
+        3-线路可靠性较高
+        4-线路利用率较高
+        5-相对于报文交换，存储管理更容易
+    b.缺点：
+        1-有存储转发时延
+        2-需要传输额外的信息量
+        3-乱序到目的主机时，要对分组排序重组
+    c.方式：
+        1-数据报方式：
+            （1）说明：数据报方式为网络层提供无连接服务
+            （2）特点：
+                --无连接
+                --每个分组携带源和目的地址 
+                --路由器根据分组的目的地址转发分组：基于路由协议/算法构建转发表；检索转发表；每个分组独立选路
+
+        2-虚电路方式
+            （1）说明：一条源主机到目的主机类似于电路的路径(逻辑链接)，路径上所有结点都要维持这条虚电路的建立，都维持一张虚电路表，每一项记录了一个打开的虚电路的信息；为网络层提供连接服务，将数据报方式和电路交换方式结合</code></pre>
+<p>###路由算法</p>
+<pre><code>--静态路由算法(非自适应路由算法)：管理员手工配置路由信息
+    a.特点：
+        简便、可靠，在负荷稳定、拓扑变化不大的网络中运行效果很好；
+        路由更新慢，不适用大型网络；
+
+--动态路由算法(自适应路由算法)：路由器间彼此交换信息，按照路由算法优化出路由表项
+    a.特点：
+        路由更新快，使用大型网络，及时响应链路费用或网络拓扑变化；
+        算法复杂，增加网络负担；
+
+    b.分类：
+        1-全局性：
+            链路状态路由算法OSPF：所有路由器掌握完整的网络拓扑和链路费用信息
+        2-分散性：
+            距离向量路由算法RIP：路由器只掌握物理相连的邻居及链路费用
+
+--分层次的路由选择协议：
+    &lt;!-- 自治系统AS：
+        在单一的技术管理下的一组路由器，而这写路由器使用一中AS内部的路由选择协议和共同的度量以确定分组在该AS的路由，同时还是用一种AS之间的路由协议以确定在AS之间的路由；一个AS内所有网络都属于一个行政单位管辖，一个自治系统的所有路由器在本自治系统内都必须连通
+     --&gt;
+     a.内部网关协议IGP：一个AS内使用的 RIP\OSPF
+     b.外部网关协议EGP：AS之间使用的BGP</code></pre>
+<p>###IP数据报</p>
+<pre><code>--格式：
+    a.首部：
+        1-固定首部(20B):
+            版本号：IPV4/IPV6
+            首部长度：单位是4B，最小为5
+            区分服务：指示期望获得哪种类型的服务
+            总长度：首部+数据，单位是1B
+            标识：同一数据报的分片使用同一标识
+            标志：只有2位有意义
+                &lt;!-- 
+                    中间位DF：为1禁止分片，为0允许分片
+                    最低位MF：为1，意味着后面还有分片，0则代表最后一片/没分片 --&gt;
+            片偏移：指出较长分组分片后，某片在原分组中的相对位置。以8B为单位
+            生存时间TTL：IP分组的保质期。经过一个路由器-1，至0则丢弃
+            协议：数据部分的协议
+            首部检验和：只检验首部
+            源地址
+            目的地址
+        2-可变部分：
+            可选字段(长度可变)：可选0-40B，用来支持排错、测量以及安全等措施
+            填充字段：全0，把首部补充4B的整数倍
+    b.数据部分
+
+--最大传送单位MTU：
+    a.说明：链路层数据帧可封装数据的上限</code></pre>
+<p>###IPV4地址</p>
+<pre><code>--IP地址：
+    a.说明：全世界唯一的32位/4字节标识符，标识路由器主机的接口
+    b.格式：&#123;&lt;网络号&gt;&lt;主机号&gt;&#125;
+
+--分类IP地址：
+    a. A类：
+        1-地址范围：10.0.0.0~10.255.255.255
+        2-网段个数：1
+
+    b. B类：
+        1-地址范围：172.16.0.0~172.31.255.255
+        2-网段个数：16
+
+    c. C类：
+        1-地址范围：192.168.0.0~192.168.255.255
+        2-网段个数：256
+
+--网络地址转换NAT:
+    &lt;!-- 路由器对目的地址是私有IP地址的数据报一律不进行转发 --&gt;
+    a.说明：在专用网连接到因特网的路由器上安装NAT软件，安装了NAT软件的路由器叫NAT路由器，它至少有一个有效的外部全球IP地址
+        &lt;!-- 在NAT转换表上包括了一个本地网断LAN和一个外网端WAN --&gt;
+    b.缺点：
+        1-IP地址空间的利用率有时很低
+        2-两级IP地址不够灵活
+
+--子网划分：
+    a.说明：三级的IP地址&#123;&lt;网络号&gt;&lt;子网号&gt;&lt;主机号&gt;&#125;
+    b.子网掩码：网络号全1，主机号全0
+    c.路由表：
+        1-目的网络地址
+        2-目的网络的子网掩码
+        3-下一跳地址
+    d.路由器转发分组的算法：
+        1-提取目的IP地址
+        2-是否直接交付
+        3-特定主机路由
+        4-检测路由表中有无路径：与路由表中的目的网络子网掩码相与
+        5-默认路由0.0.0.0
+        6-丢弃，报告转发分组出错
+
+--无分类编址CIDR：
+    a.格式：IP地址后加上&quot;/&quot;，然后写上网络前缀(可以任意长度)的位数 
+    b.子网掩码：网络前缀位数全为1，主机号全为0
+
+--ARP协议：
+    a.说明：完成主机或路由器IP地址到MAC地址的映射
+    b.使用过程：
+        检查ARP高速缓存，有对应表项则写入MAC帧，没有则用目的MAC地址为FF-FF-FF-FF-FF-FF的帧封装并广播ARP请求信号，同一个局域网中所有主机都能收到该请求。目的主机收到请求后就会向源主机单播一个ARP响应分组，源主机收到后将此映射写入ARP缓存(10-20min更新一次)
+    c.典型情况：
+        1-主机A发给本网络上的主机B：用ARP找到主机B的硬件地址
+        2-主机A发给另一网络的主机B：用ARP找到本网络上一个路由器(网关)的硬件地址
+        3-路由器给本网络的主机A：用ARP找到主机A的硬件地址
+        4-路由器发给另一网络的主机B：用ARP找到本网络上的一个路由器的硬件地址
+
+--DHCP协议：
+    a.说明：动态主机配置协议DHCP是应用层协议，使用客户/服务器方式，客户端和服务端通过广播的方式进行交互，基于UDP；其提供即插即用联网的机制，主机可以从服务器动态获取IP地址、子网掩码、默认网关、DNS服务器名称与IP地址，允许地址重用，支持移动用户加入网络，支持在用地址续租
+    b.步骤：
+        1-主机广播DHCP发现报文
+        2-DHCP服务器广播DHCP提供报文
+        3-主机广播DHCP请求报文
+        4-DHCP服务器广播DHCP确认报文
+
+--ICMP协议：
+    a.说明：网际控制报文协议，支持路由器或主机
+    b.分类：
+        1-ICMP差错报告报文：
+            （1）终点不可达：报文无法交付
+            （2）源点抑制：拥塞丢数据
+            （3）时间超过：生存时间TTL=0
+            （4）参数问题：首部字段存在问题
+            （5）改变路由(重定向)：选择更好路径
+            &lt;!-- 
+                不适用情况：
+                1-ICMP差错报告报文本身
+                2-第一个分片的数据报片的后续所有后续数据报片
+                3-具有组播地址的数据报
+                4-具有特殊地址(如127.0.0.0或0.0.0.0) 
+            --&gt;
+        2-ICMP询问报文：
+            （1）回送请求和回答报文：收到此报文的主机必须给源主机或路由器发送ICMP回送回答报文；用来测试目的站是否可达以及了解相关状态
+            （2）时钟戳请求和回答报文：请求某个主机或路由器回答当前的日期和时间；用来进行时钟同步和测量时间
+
+    c.应用：
+        1-PING：测试两个主机之间的连通性，实用了ICMP回送请求和回答报文
+        2-Traceroute：跟踪一个分组从源点到终点的路径没使用了ICMP时间超过差错报告报文</code></pre>
+<p>###IPV6</p>
+<pre><code>--IPV6数据包格式：
+    ![Image text](./image/IPV6.jpg)</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/05/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%94%E7%BD%91%E7%BB%9C%E5%B1%82/" data-id="ckp27pssk000cn8ub34v3fhim" data-title="计算机网络——网络层" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-计算机网络—数据链路层" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/14/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%94%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" class="article-date">
+  <time class="dt-published" datetime="2021-05-14T12:35:57.564Z" itemprop="datePublished">2021-05-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/05/14/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%94%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/">计算机网络——数据链路层</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="计算机网络"><a href="#计算机网络" class="headerlink" title="#计算机网络"></a>#计算机网络</h2><h2 id="数据链路层"><a href="#数据链路层" class="headerlink" title="##数据链路层"></a>##数据链路层</h2><p>###基本概念</p>
+<pre><code>数据链路层：
+    --结点：主机、路由器
+    --链路：网络中两个结点之间的物理通道
+    --数据链路：网络中两个结点之间的逻辑通道，把实现控制数据传输协议的硬件和软件加到链路上就构成数据链路
+    --帧：链路层的协议数据单元，封装网络层数据报
+
+    --说明：
+        在物理层提供服务的基础上向网络层提供服务，其最基本的服务是将源自网络层来的数据可靠地传输到相邻节点的目标机网络层。其主要作用是加强物理层传输原始比特流的功能，将物理层提供的可能出错的物理连接改造成为逻辑上无差错的数据链路，使之对网络层表现为一条无差错的链路
+
+    --功能：
+        --为网络层提供服务。无确认无连接服务，有确认无连接服务，有确认面向连接服务
+        --链路管理，即连接的建立、维持、释放(用于面向连接的服务)
+        --组帧
+        --流量控制
+        --差错控制
+
+局域网：
+    --说明：简称LAN(Local Area NetWork)，是指在某一区域内由多台计算机互联成的计算机组，使用广播信道
+
+    --特点：
+        a.覆盖的地理范围较小，只在一个相对独立的局部范围内联
+        b.使用专门铺设的传输介质进行联网，数据传输速率高
+        c.通信延迟时间短，误码率低，可靠性高
+        d.各重站点关系平等，共享传输信道
+        e.采用分布式控制和广播式通信，能进行广播和组播
+
+    --决定因素：
+        a.网络拓扑
+            1-星型拓扑
+            2-总线拓扑
+            3-环形拓扑
+            4-树形拓扑
+        b.传输介质
+        c.介质访问控制方法
+            1-CSMA/CD：常用于总线型局域网，也用于属性网络
+            2-令牌总线：同上
+            3-令牌环：用于环形局域网，如令牌环网
+
+    --分类：
+        a.以太网：逻辑总线，物理星型或拓展星型，使用CSMA/CD，符合IEEE802.3系列标准规范
+            &lt;!-- 
+                802.3：以太网介质访问控制协议(CSMA/CD)及物理层技术规范
+                802.5：令牌环网的介质访问控制协议
+                802.8：光线技术咨询组，提供有关光纤联网的技术咨询
+                802.11：无线局域网的介质访问控制协议以及物理层技术规范
+                     MAC帧头（WDS无线分布式系统）：
+                         帧控制(2) 生存周期ID(2) 地址1接收端RA(6) 地址2发送端RA(6) 地址3目的地址DA(6) 序列控制(2) 地址4源地址SA(6)
+            --&gt;
+            1-特点：只实现无差错接收，不实现可靠传输，差错帧直接丢弃，差错纠正由高层负责
+            2-组成：
+                （1）适配器：计算机与外界有局域网的连接式通过通信适配器
+                    &lt;!-- MAC地址：每一个适配器有一个全球唯一的48位二进制地址，前24位代表厂家(由IEEE规定)，后24位厂家自己指定 --&gt;
+            3-高速以太网：速率&gt;=100Mb/s的以太网称为高速以太网
+                （1）100BASE-T以太网：
+                        在双绞线上传送100Mb/s基带信号的星型拓扑以太网，仍使用IEEE802.3的CSMA/CD协议，支持全双工和半双工，可在全双工方式下工作而无冲突
+                （2）吉比特以太网：
+                        在光纤或双绞线上传送1GB/s信号，支持全双工和半双工，可在全双工方式下工作而无冲突
+                （3）10吉比特：
+                        10吉比特以太网在光纤上传送10Gb/s信号，支持全双工，无争用问题
+
+        b.令牌环网：物理双环，逻辑环型
+        c.FDDI网：物理双环，逻辑环型
+        d.ATM网：较新型的单元交换技术，使用53字节固定长度的单元进行交换
+        e.无线局域网(WLAN)：符合IEEE802.11标准规范
+
+广域网
+    --说明：简称(WAN，Wide Area NetWork)，通常跨接很大的物理范围，广域网的通信子网主要使用分组交换技术，将分布在不同地区的局域网或计算机系统互连起来，达到资源共享的目的</code></pre>
+<p>###封装成帧&amp;透明传输</p>
+<pre><code>说明：
+    就是在一段数据的前后部分添加首部和尾部，这样就构成了一个帧。接收端在收到物理层上交的比特流后，就能根据首部和尾部的标记，从收到的比特流中识别帧的开始和结束
+    &lt;!-- 
+        首部尾部的作用：
+            a.帧定界(确定帧的界限)
+            b.帧同步：接收方应当能从接收到的二进制比特流中区分出帧的起始和终止
+    --&gt;
+
+方法：
+    --字符计数法：
+        帧首部使用一个计数字段(第一个字节，8位)来表明帧内字符数
+
+    --字符填充法：
+        使用SOH作为首部，EOT作为尾部，判断帧的开始和结束；
+        当传送的帧是文本文件组成，因为文本文件的字符都是ASCII码，是从键盘中输入的不会和首尾部控制信息发生冲突，即透明传输
+        当传送的帧是非ASCII码的文本文件组成时，要采用字符软冲方法实现透明传输，在其中进行字符填充
+
+    --零比特填充法：
+        在发送端遇到五个一添加一个0，接收端反之；
+        在传送的比特流中可以传送任意比特组合，而不会引起对帧边界的判读错误，保证了透明传输
+
+    --违规编码法：
+        通过“高-高”，“低-低”来定界帧的起始和终止
+
+透明传输：
+    --说明：是指不管所传数据是什么样的比特组合，都应当能够在链路层上传送；</code></pre>
+<p>###差错控制</p>
+<pre><code>起因：
+    --随机热噪声
+    --冲击噪声
+
+位错：比特位出错，其针对的是一组比特，而物理层的编码针对的是单个比特
+    --检错编码：
+        a.奇偶校验码：由1位校验元和n-1位信息元构成，只能检查出奇数个比特错误，检错能力是50%
+        b.循环冗余码CRC：
+            发送端的数据由发送的数据和帧检验序列(冗余码/FCS)构成
+                &lt;!-- 
+                    冗余码的计算：
+                        1-加0：假设生成的多项式G(x)的阶为r,则加r个0 
+                        2-模2除法：数据加0后除以多项式，余数则为冗余码
+                --&gt;
+            接收端则判断该帧除以同样的除数，余数是否为0，是则没问题，否则存在差错，则丢弃；
+            FCS的生成以及接收端CRC检验都是由硬件实现，不会延误数据的传输
+    --纠错编码
+        a.海明码：发现双比特错，纠正单比特错
+            1-确定校验码位数：
+                &lt;!-- 海明不等式：2的r次方&gt;=k+r+1，r为冗余信息位，k为信息位--&gt;
+            2-确定校验码和数据的位置
+            3-求出校验码的值
+            4-检错并纠错
+帧错：
+    --丢失
+    --重复
+    --失序 </code></pre>
+<p>###流量控制&amp;可靠传输机制</p>
+<pre><code>&lt;!-- 其与传输层流量控制的区别：
+        链路层的流量控制是点对点的，传输层的流量控制是端到端的；
+        数据链路层流量控制的手段：接收方瘦不下就不回复确认 ，而传输层是通过接收端给发送端一个窗口公告
+--&gt;
+
+说明：控制发送速率，使接收方有足够的缓冲空间来接受每一个帧
+
+方法：
+    --停止-等待协议：每发送完一个帧就停止发送，等待对方确认，在收到确认后再发送下一个帧；发送串口大小=1，接收窗口大小=1；实现简单，但是信道利用率低
+
+        &lt;!-- 信道利用率：发送方在一个发送周期内，有效的地发送数据所需要地时间栈整个发送周期的比率
+                        信道利用率 = (L/C)/T ---&gt;T发送周期(从开始发送数据，到收到第一个确认帧为止)，L指T内发送L比特数据，C发送方数据传输率
+                        信道吞吐率 = 信道利用率*发送方的发送速率
+        --&gt;
+
+        a.无差错情况：
+            每发送1个数据帧就停止等待，等待接收帧发送回来的ACK信号，用1bit进行编号
+
+        b.有差错情况：
+            1-数据帧丢失或检测到帧出错
+                通过设置一个超时计时器，每次发送一个帧就启动一个计时器，当在规定时间内没有接受到确认信号，就进行自动重传
+                &lt;!-- 
+                    注：
+                        1-发送完一个帧后，必须保留其副本
+                        2-数据帧和确认帧必须编号 
+                --&gt;
+            2-ACK丢失：同样设置超时计时器，接收方在接收到重新发送的数据帧，将丢弃掉刚开始接收到的数据帧
+            3-ACK迟到：对于晚到的确认帧，接收后丢弃
+
+    --滑动窗口协议：能够进行流量控制，同时进行可靠传输(发送方自动重传)
+        a.后退N帧协议(GBN)：
+            1-说明：
+                （1）发送窗口大小&gt;1，接收窗口大小=1
+                    &lt;!-- 
+                        滑动窗口长度：
+                            若采用n个比特对帧编号，那么发送窗口的尺寸W应满足：1&lt;=W&lt;=2的n次方-1
+                            发送窗口过大，会使得接收方无法区别新旧帧 
+                    --&gt;
+
+            2-步骤：
+                发送方：
+                （1）上层调用：
+                        上层要发送数据时，发送方先检查发送窗口是否已满，如果未满，则产生一个帧并将其发送；如果窗口已满，发送方只需将数据返回给上层，暗示上层窗口已满。上层等待后再发生(实际上，发送方可以缓存这些数据，窗口不满时再发送帧)
+                （2）收到一个ACK：
+                        对n号帧的确认采用累计确认的方式，标明接收方已经收到n号帧和它之前的全部帧
+                （3）超时事件：
+                        协议的名字为后退N帧/回退N帧，来源于出现丢失帧和时延过长时发送方的行为，就像在停等协议中一样，定时器价将在此用于恢复数据帧或确认帧的丢失。如果出现超时，发送方重传所有已发送单未被确认的帧
+
+                接收方：
+                    如果正确收到n号帧，并且按序，那么接收方为n帧发送一个ACK，并将该帧中的数据部分交付给上层；其余情况都丢弃帧，并未最近按序接收的帧重新发送ACK，接收方无需缓存任何失序帧，只需要维护一个信息：expectedseqnum(下一个按序接收的帧序号)
+
+        b.选择重传协议(SR)
+            1-说明：
+                （1）发送窗口大小&gt;1，接收窗口大小&gt;1
+                    &lt;!-- 
+                        注：发送窗口最好等于接收窗口 = 2的n-1次方
+                    --&gt;
+            2-步骤：
+                发送方：
+                （1）上层调用：
+                        从上层收到数据后，SR发送方检查下一个可用于该帧地序号，如果序号位于发送窗口内，则发送数据帧；否则就像GBN一样，要么将数据缓存，要么返回给上层之后再传输
+                （2）收到一个ACK：
+                        如果收到ACK，加入该帧序号在窗口，则SR发送方将那个被确认的帧标记为已接收。如果该帧序号是窗口的下界(最左边第一个窗口对应的序号)，则窗口向前移动到具有最小序号的未确认帧处，如果窗口移动了并且有序号在窗口内的未发送帧，则发送这些帧
+                （3）超时事件：每个帧都有自己的定时器，一个超时事件发生后只重传一个帧
+
+                接收方：
+                    将确认一个正确接受的帧而不管其是否按序，失序的帧将被缓存，并返回给发送方一个该帧的确认帧，直到所有帧(即序号更小的帧)皆被收到为止，这时才可以将一批帧按序交付给上层，然后向前移动滑动窗口；如果收到了窗口序号外(小于窗口下界)的帧，就返回一个ACK</code></pre>
+<p>###信道划分介质访问控制            </p>
+<pre><code>传输数据使用链路：
+    --点对点链路：
+        a.说明：两个相邻节点通过一个链路相连，没有第三者
+        b.应用：PPP协议，常用于广域网
+
+    --广播式链路：
+        a.说明：所有主机共享通信介质
+        b.应用：早期的总线以太网、无线局域网，常用于局域网
+
+说明：采取一定的措施，使得两队节点之间的通信不会发生互相干扰的情况
+
+方式：
+    --静态划分信道：
+        a.信道划分介质访问控制(MAC)：将使用介质的每个设备与来自同一信道上的其他设备的通信隔离开，把时域饥饿频域资源合理地分配给网上的设备，在网络负载重时，共享信道效率高，且公平，在负载轻时，则共享信道效率较低
+            &lt;!-- 
+                多路复用技术：把多个信号组合在一条物理信道上进行传输，使得多个计算机或终端设备共享信道资源，提高信道利用率
+             --&gt;
+            1-频分多路复用FDN：
+                （1）说明：
+                    用户在分配到一定的频带后，在通信过程中自始至终都占用这个频带，频分复用地所有用户在同样的时间占用不同的带宽(频率带宽)资源
+                （2）优点：
+                    充分利用传输介质带宽，系统效率较高，实现比较容易
+            2-时分多路复用TDM
+                （1）说明：将时间划分为一段段等长地时分复用帧(TDM)，每一个时分复用地用户在每一个TMD帧中占用固定序号的时隙，所有用户轮流占用信道
+                    &lt;!-- TDM帧是在物理层传送的比特流所划分的帧，标志一个周期 --&gt;
+            3-波分多路复用WDM
+                （1）说明：就是指光的频分多路复用，在光纤中传输多种不同波长的光信号，根据波长不同，各路光信号互不干扰，通过波长分解复用器将各路波长分解出来
+            4-码分多路复用CDM
+
+    --动态划分信道：动态媒体接入控制\多点接入，信道并非在用户通信时固定分配给用户
+        a.轮询访问介质访问控制：
+            1-令牌传递协议：每个结点都可以在一定的时间内获得发送数据的权力，并不是无限地持有令牌
+                &lt;!-- 
+                    令牌：一个特殊格式的MAC空指帧，不含任何信息，控制信道的使用，确保同一时刻只有一个结点独占信道；令牌环网无碰撞
+                --&gt;
+                a.问题：
+                    1-令牌开销
+                    2-等待延迟
+                    3-单点故障
+                b.应用：应用于令牌环网(物理星型拓扑，逻辑环形拓扑)，常用于负载较重、通信量较大的网络中
+
+            2-轮询协议：星型拓扑的方式，主结点进行挨个询问
+
+        b.随机访问介质访问控制
+            1-ALOHA协议
+                a.纯ALOHA协议：不监听信道，不按时间槽发送，随机发送；发生冲突，接收方就会检测出差错，然后不确认，发送方在一定时间内收不到就判断发生冲突，在超时后等一随机时间再重传
+                b.时隙ALOHA协议：把时间分成若干个时间片，所有用户在时间片开始时刻同步接入网络信道，若发生冲突，则必须等到下一个时间片开始时刻再发送
+            2-CSMA协议
+                （1）说明：载波监听多路访问协议，在发送帧之前，监听信道
+                    &lt;!-- 
+                        CS：载波侦听/监听，每一个站在发送数据之前要检测一下总线上是否有其他计算机在发送数据
+                        MA：多点接入，表示许多计算机以多点接入的方式连接在一根总线上(总线型网络)
+                     --&gt;
+                （2）方法：
+                    1-- 1-坚持CSMA思想：空闲传输，忙则等待，如果有冲突，则等待一个随机长的时间再监听，重复上述过程。
+                        特点：
+                            避免了媒体利用率的损失；
+                            如果有两个或以上的站点有数据要发送，冲突不可避免
+                    2--非坚持CSMA：空闲传输，忙则等待一个随机事件之后再进行监听
+                        特点：
+                            采用随机的重发延迟时间可以减少冲突发生的可能性；
+                            可能存在大家都在延迟等待过程中，使得媒体仍可能处于空闲状态，媒体使用率降低
+                    3-- p-坚持CSMA：
+                        指的是监听信道空闲的处理；如果一个主机要发送消息，那么它先监听信道，空闲则以p概率直接传输，不必等待；概率1-p等待到下一个时间槽再传输
+                        特点：
+                            能够减少冲突，同时减少媒体空闲时间；
+                            发生冲突后还是要坚持把数据帧发送完，造成了浪费；
+
+            3-CSMA/CD协议
+                    &lt;!-- 
+                        CS：载波侦听/监听，每一个站在发送数据之前要检测一下总线上是否有其他计算机在发送数据
+                        MA：多点接入，表示许多计算机以多点接入的方式连接在一根总线上
+                        CD： 碰撞检测(冲突检测)，“边发送边监听”，适配器边发送数据边检测信道上信号电压的变化情况，以便判断自己在发送数据时其他站是否也在发送数据(半双工网络)
+                    --&gt;
+                （1）说明：载波监听多点接入/碰撞检测
+                （2）特性：
+                        确定碰撞后的重传时机：使用截断二进制指数规避算法
+                        最小帧长：帧的传输时延至少要两倍于信号在总线中的传播时延(总线传播时延*数据传输速率*2)
+
+            4-CSMA/CA协议
+                （1）说明：载波监听多点接入/碰撞避免
+                （2）工作原理：
+                        --发送数据前，先检测信道是否空闲，空闲则发出(RTS，request to send)，RTS包括发射端的地址、接收端的地址、下一份数据将持续发送的时间等信息；信道忙则等待
+                        --接收端收到RTS后，将响应CTS(clear to send)
+                        --发送端收到CTS后，开始发送数据帧(同时预约信道：发送方告知其他站点自己要传送多久数据)
+                        --接收端收到数据帧后，将用CRC来检验数据是否正确，正确则相应ACK帧
+                        --发送方收到ACK就可以进行下一个数据帧的发送，若没有则一直重传至规定重发次数位置(采用二进制数退避算法来确定随机的推迟时间)
+
+                （3）应用：无线局域网</code></pre>
+<p>###PPP协议(点对点协议Ponint-to-Point Protocol)</p>
+<pre><code>--说明：是目前使用最广泛的数据链路层协议，只支持全双工链路
+--要求：
+    a.简单：对于链路层的帧，无需纠错，无需序号，无需流量控制
+    b.封装成帧
+    c.透明传输
+    d.多种网络层协议：封装的IP数据报可以采用多种协议
+    e.多种类型链路
+    f.差错检测：错误就丢弃
+    g.检测连接状态
+    h.最大传送单元
+    i.网络层地址协商：知道通信双方的网络层地址
+    j.数据压缩协商
+
+--组成：
+    a.将一个IP数据报封装导串行链路的方法
+    b.链路控制协议LCP：建立并维护数据链路连接(身份验证)
+    c.网络控制协议NCP：PPP支持多种网络协议，每个不同的网络层协议都要一个相应的NCP来配置，为网络层协议建立和配置逻辑连接
+
+--HDLC协议：
+    a.说明：高级数据链路控制，是一个在同步网上传输数据、面向比特的数据链路层协议
+
+    b.组成：
+        1-主站：发送命令(包括数据信息)帧、接收响应帧，并负责对整个链路的控制系统的初启、流程的控制、差错检测或恢复等
+        2-从站：接收由主站发来的命令帧，向主站发送响应帧，并且配合主站参与差错恢复等链路控制
+        3-复合站：技能发送，有能接收命令帧和响应帧，并且负责整个链路的控制
+
+    c.数据响应方式：
+        1-正常响应方式
+        2-异步平衡方式
+        3-异步响应方式
+
+    d.帧的分类
+        1-信号帧：第1位为0，用来传输数据信息，或使用捎带技术对数据进行确认
+        2-监督帧10，用于流量控制和差错控制，执行对信息帧的确认、请求重发和请求暂停发送等功能
+        3-无编号帧11，用于提供对链路的建立、拆除等多种控制功能</code></pre>
+<p>###链路层设备</p>
+<pre><code>网桥：
+    --说明：连接着网段，根据MAC帧的目的地址对帧进行转发和过滤。当网桥收到一个帧时，并不向所有接口转发此帧，而是先检查此帧的目的MAC地址，然后再确定将该帧转发发到指定接口，或者是把它丢弃
+        &lt;!-- 网段：一般指一个计算机网络中使用同一物理层设备(传输介质，中继器，集线器等)能够直接通讯的那一部分 --&gt;
+
+    --分类：
+        a.透明网桥：“透明”指以太网上的站点并不知道所发送的帧将警告哪几个网桥，是一种即插即用设备--自学习
+        b.源路由网桥：在发送帧时，把详细的最佳路由信息(路由最少/时间最短)放在帧的首部中
+            &lt;!-- 方法：源站以广播方式向欲通信的目的站发送一个发现帧 --&gt;
+
+    --优点：
+        a.过滤通信量，增大吞吐量
+        b.扩大了物理范围
+        c.提高了可靠性
+        d.可互连不同物理层、不同MAC子层和不同速率的以太网
+
+交换机(多接口网桥)：
+    --说明：每个接口可以独占传输媒体带宽
+
+    --分类：
+        a.直通式交换机：查完目的地址(6B)就立刻转发
+            特点：延迟小，可靠性低，无法支持具有不同速率的端口有交换
+        b.存储转发式交换机：将帧放入高速缓存，并检查是否正确，正确则转发，错误则丢弃
+            特点：延迟大，可靠性高，可以支持具有不同速率的端口的交换
+    &lt;!-- 
+        冲突域：在同一个冲突域中的每一个节点都能收到所有被发送的帧，就是同一时间内只能有一台设备发送信息的范围
+        广播域：网络中能接收任意设备发出的广播帧的所有设备的集合，即如果站点发出一个广播信号，能接受收到这个信号的设备范围称为一个广播域
+     --&gt;</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/05/14/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%94%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" data-id="ckp27psso000gn8ubeynuglgl" data-title="计算机网络——数据链路层" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-计算机网络—物理层" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/05/14/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%94%E7%89%A9%E7%90%86%E5%B1%82/" class="article-date">
@@ -193,7 +814,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/05/14/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%94%E7%89%A9%E7%90%86%E5%B1%82/" data-id="ckoo0iqv0000bl8ubhz4s1hs6" data-title="计算机网络——物理层" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/05/14/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%94%E7%89%A9%E7%90%86%E5%B1%82/" data-id="ckp27pssh000bn8ub2wzr4y57" data-title="计算机网络——物理层" class="article-share-link">Share</a>
       
       
       
@@ -404,7 +1025,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/05/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" data-id="ckoo0iquy000al8ubc4qp02mf" data-title="计算机网络" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/05/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" data-id="ckp27psse000an8ubhasfap39" data-title="计算机网络" class="article-share-link">Share</a>
       
       
       
@@ -441,11 +1062,19 @@
         <h2 id="java编程杂记"><a href="#java编程杂记" class="headerlink" title="#java编程杂记"></a>#java编程杂记</h2><p>##集合</p>
 <pre><code>--List是一个接口
 --HashSet常用方法：https://www.cnblogs.com/qilin20/p/12300384.html</code></pre>
+<p>##数据类型转换</p>
+<pre><code>--StringBuffer和String的转换
+    a.String--&gt;StringBuffer：
+        1-构造函数
+        2-append()函数
+    b.StringBuffer--&gt;String
+        1-构造函数
+        2-通过toString方法</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/05/11/java%E7%BC%96%E7%A8%8B%E6%9D%82%E8%AE%B0/" data-id="ckoo0iquo0004l8uba2ga9912" data-title="Java编程杂记" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/05/11/java%E7%BC%96%E7%A8%8B%E6%9D%82%E8%AE%B0/" data-id="ckp27pss80004n8ub9ll3dura" data-title="Java编程杂记" class="article-share-link">Share</a>
       
       
       
@@ -515,7 +1144,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/05/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/" data-id="ckoo0iquw0008l8ub0uvihzpn" data-title="操作系统——设备管理" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/05/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/" data-id="ckp27pssd0009n8ubc99rh56d" data-title="操作系统——设备管理" class="article-share-link">Share</a>
       
       
       
@@ -715,7 +1344,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/05/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" data-id="ckoo0iqus0006l8ubckeogedt" data-title="操作系统——文件管理" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/05/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" data-id="ckp27pssc0008n8ub6i9shawy" data-title="操作系统——文件管理" class="article-share-link">Share</a>
       
       
       
@@ -1121,7 +1750,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/05/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/" data-id="ckoo0iqvd000el8ubafte0rrf" data-title="操作系统——进程管理" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/05/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/" data-id="ckp27pssn000fn8ubex4pdqcp" data-title="操作系统——进程管理" class="article-share-link">Share</a>
       
       
       
@@ -1333,7 +1962,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/05/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" data-id="ckoo0iquu0007l8ub0bn62m5x" data-title="操作系统——内存管理" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/05/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" data-id="ckp27pssb0007n8ub9um63bqn" data-title="操作系统——内存管理" class="article-share-link">Share</a>
       
       
       
@@ -1486,538 +2115,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/04/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" data-id="ckoo0iqux0009l8ubea9gcmu3" data-title="操作系统" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Java8新特性" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/04/28/Java8%E6%96%B0%E7%89%B9%E6%80%A7/" class="article-date">
-  <time class="dt-published" datetime="2021-04-28T13:02:09.853Z" itemprop="datePublished">2021-04-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/04/28/Java8%E6%96%B0%E7%89%B9%E6%80%A7/">Java8新特性</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>#java8</p>
-<pre><code>优点：
-    --速度更快
-    --代码更少(增加了新的语法：Lambda表达式)
-    --强大的Stream API
-    --便于并行
-    --最大化减少空指针异常：Optional
-    --Nashorn引擎，允许在JVM上运行JS应用</code></pre>
-<hr>
-<p>##Lambda表达式</p>
-<pre><code>说明：是一个匿名函数，可以将其理解为一段可以传递的代码，使用它可以写出更简洁、更灵活的代码
-本质：作为函数式接口的一个实例
-    函数式接口：
-        说明：只包含一个抽象方法的接口
-
-        使用：
-            --可以在接口上使用@Funtionallnterface注解，检查其是否是一个函数式接口，同时javadoc也会包含一条声明，说明这个接口是一个函数式接口
-
-        常用的四大核心函数式接口：
-            --Consumer&lt;T&gt;消费型接口：
-                void accept(T t)
-            --Suppelier&lt;T&gt;供给型接口：
-                T get()
-            --Function&lt;T,R&gt;函数型接口：
-                R apply(T t)
-            --Predicate&lt;T&gt;断定型接口：
-                boolean test(T t)
-
-
-格式：
-    -&gt; ：Lambda操作符或箭头操作符
-    -&gt; 左边：Lambda形参列表(其实就是接口中的抽象方法的形参列表)
-    -&gt; 右边：Lambda体(其实就是重写的抽象方法的方法体)
-
-    使用：
-        接口名 r1 = (形参列表) -&gt; &#123;
-            执行语句
-        &#125;；
-    注意:
-        --Lambda形参列表等等参数类型可以省略(类型推断);如果Lambda形参列表只有一个参数，其括号可以省略
-        --Lambda体应使用一对&#123;&#125;包裹；如果Lambda体只有一条执行语句(可能是return语句)，省略这一对&#123;&#125;和return关键字
-
-方法引用
-    说明：通过方法的名字来指向一个方法，可以认为是Lambda表达式的一个语法糖
-    要求：
-        实现接口的抽象方法的参数列表和返回值类型，必须与方法引用的方法的参数列表和返回值类型保持一致
-    格式：
-        使用操作符“::”将类(或对象)与方法名分隔开来
-    使用情景：
-        当要传递给Lambda体的操作，已经有实现的方法
-    具体情况：
-        --对象::非静态方法
-        --类::静态方法
-        --类::非静态方法
-
-构造器引用：
-    要求：和方法引用类似，函数式接口的抽象方法的形参列表的构造器的形参列表一致；抽象方法的返回值类型即为构造器所属的类的类型</code></pre>
-<p>##Stream API</p>
-<pre><code>执行步骤：
-    --Stream实例化：
-        （1）通过集合：
-            --default Stream&lt;E&gt; stream()：返回一个顺序流
-            --default Stream&lt;E&gt; parallelStream()：返回一个并行流
-        （2）通过数组：
-            --调用Arrays类的static &lt;T&gt; Stream&lt;T&gt; stream(T[] array)：返回一个流
-        （3）通过Stream的of()
-        （4）创建无限流：可以使用静态方法Stream.iterate()和Stream.generate()创建无限流
-            --迭代：public static&lt;T&gt; Stream&lt;T&gt; iterate(final T seed,final UnaryOperator&lt;T&gt; f)
-            --生成：public static&lt;T&gt; Stream&lt;T&gt; generate(Supplier&lt;T&gt; s)
-
-    --中间操作
-        （1）筛选与切片
-            --filter(Predicate p)：接收Lambda，从流中排除某些元素
-            --Limit(n)：截断流，使其元素不超过给给定数量
-            --skip(n)：跳过元素，返回一个扔掉了前n个元素的流。若流中的元素不足n个，则返回一个空流
-            --distinct()：筛选，通过流所生成元素的hashCode()和equals()去除重复的元素
-        （2）映射
-            --map(Function f)：接收一个函数作为参数，将元素转换成其他形式或提取信息，该函数会被应用到每个元素
-            --flatMap：接收一个函数作为参数，将流中的每个值都换成另一个流，然后把所有流连接成一个
-        （3）排序：对于自定义类一定要进行对于Comparable接口的实现或定制排序
-            --sorted()：产生一个新流，其中按自然顺序排序
-            --sorted(Comparator com)：产生一个新流，其中按比较器顺序排序
-
-    --终止操作
-        （1）匹配与查找
-            --allMatch(Predicate p)：检查是否匹配所有元素
-            --anyMatch(Predicate p)：检查是否至少匹配一个元素
-            --noneMatch(Predicate p)：检查是否没有匹配的元素
-            --findFirst()：返回第一个元素
-            --findAny()：返回当前流中的任意元素
-            --cout()：返回流中元素的总个数
-            --max/min(Comparator c)：返回流中最大值/最小值
-            --foreach(Consumer c)：内部迭代（使用Collection接口需要用户去做迭代称为外部迭代）
-
-        （2）归约
-            --reduce(T identify,BinaryOperator)：可以将流中元素反复结合起来，得到一个值，返回T类型数据
-            --reduce(BinaryOperator)：可以将流中元素反复结合起来，得到一个值，返回Optional&lt;T&gt;类型数据
-
-        （3）收集
-            --collect(Collector c)：将流转换为其他形式；接受一个Collector接口的实现，用于给Stream中元素做汇总的方法
-                注意：Collector接口中方法实现决定了如何对流执行收集的操作；另外，Collectors实用类提供了很多的静态方法，可以方便的创建常见收集器实例
-
-注意：
-    --Stream是对数据的运算，与CPU相关；集合关注的是数据的存储，与内存相关
-    --Stream自己不会存储元素
-    --Stream不会改变源对象，但是会返回一个持有结果的新Stream
-    --Stream操作是延迟执行，意味着其会等到需要结果的时候才执行</code></pre>
-<p>##Optional类</p>
-<pre><code>说明：Optional&lt;T&gt;类(java.util.Optional)是一个容器类，它可以保存类型T的值，代表这个值存在。或者仅仅保存null，表示这个值不存在
-
-常用方法：
-    --创建Optional类对象的方法：
-        Optional.of(T t)：创建一个Optional实例，t必须非空
-        Optional.empty()：创建一个空的Optional对象
-        Optional.ofNullable(T t)：t可以为null
-
-    --判断Optional容器中是否包含对象：
-        boolean isPresent()：判断是否包含对象
-        void ifPresent(Conmuser&lt;?super T&gt; consumer)：如果有值，就执行Consumer接口的实现代码，并且该值会作为参数传给它
-
-    --获取Optional容器的对象：
-        T get()：如果调用对象保函值，返回该值，否则抛异常
-        T orElse(T other)：如果有值则将其返回，否则返回指定的other对象
-        T orElseGet(Supplier&lt;? extends T&gt; other)：如果有值则将其返回，否则返回由Supplier接口实现提供的对象
-        T orElseThrow(Supplier&lt;? extends X&gt; exceptionSupplier)：如果有值则将其返回，否则抛出由Supplier接口实现提供的异常</code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/04/28/Java8%E6%96%B0%E7%89%B9%E6%80%A7/" data-id="ckoo0iqul0003l8ub7r7xfezk" data-title="Java8新特性" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-java简单类库的使用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/04/06/java%E7%AE%80%E5%8D%95%E7%B1%BB%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
-  <time class="dt-published" datetime="2021-04-06T06:27:24.916Z" itemprop="datePublished">2021-04-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/04/06/java%E7%AE%80%E5%8D%95%E7%B1%BB%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/">Java类库与基本操作</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="简单的类库使用"><a href="#简单的类库使用" class="headerlink" title="#简单的类库使用"></a>#简单的类库使用</h2><p>###数字</p>
-<pre><code>Math.random():令系统随机选取大于等于0.0且小于1.0的伪随机double值
-    Math.random()*(n-m)+m：返回指定范围的随机数（m-n之间）的公式</code></pre>
-<hr>
-<p>###字符</p>
-<pre><code>string.equals():判断二者是否相同 </code></pre>
-<hr>
-<p>###Arrys工具类</p>
-<pre><code>Ops:java.util.Arrays
-Using:
-    sort():快速排序
-    binary():二分查找
-    equals():判断两个数组是否相同
-    fill(int[] a,int val):将指定值填充到数组之中</code></pre>
-<hr>
-<p>###JavaBean:是一种Java语言写成的可重用组件（也是一个Java类）</p>
-<pre><code>特征：
-    （1）类是公共的
-    （2）有一个无参的公共的构造器
-    （3）有属性，且对应的get、set方法
-功能：
-    可以将功能、处理、值、数据库访问和其他任何可以用Java代码创造对象进行打包，并且其他的开发者可以通过内部的JSP页面、Servlet、其他JavaBean、applet程序或者应用来使用这些对象。</code></pre>
-<hr>
-<p>###UML类图</p>
-<pre><code>结构：
-    类名
-    属性（属性名：属性类型）
-    方法（方法的类型 方法名(参数名：参数类型)：返回值类型）注：若方法有下划线表示为构造器
-    ‘+’表示public,‘-’表示private，‘#’表示proctected</code></pre>
-<hr>
-<p>###Object类（是所有java类的根父类，如果在类的声明中未使用extends关键字指明其父类，则默认父类为java.lang.Object类） </p>
-<pre><code>（1）equals()： 比较二者是否相同
-
-    使用：
-        （1）是一个方法，并不是运算符
-        （2）只能适用于引用数据类型
-        （3）Object类中定义的equals()和==的作用是相同的，比较两个对象的地址值是否相同
-        （4）在String、Data、File、包装类等都重写了Object类中的equals()方法，重写后，比较的是两个对象的实体内容
-
-    与“==”的却别：
-        ==：
-            （1）可以使用在基本数据类型 变量和引用数据类型变量中
-            （2）如果比较的是基本数据类型变量，比较二者保存的数据是否相同（不一定要类型相同）
-                如果比较的是引用数据类型变量，比较两个对象的地址值是否相同，即两个引用是否指向同一个对象实体
-
-（2）toString()：
-
-    使用：
-        a.当输出一个对象的引用时，实际上就是调用当前对象的toString()方法
-        b.String、Date、File、包装类等都重写了Object类中的toString()方法</code></pre>
-<hr>
-<p>###包装类(Wrapper)的使用</p>
-<pre><code>功能：java提供了8种数据类型对应的包装类，使得基本数据类型的变量具有类的特征
-使用：
-    （1）基本数据类型、包装类、String三者之间的相互转换
-        基本数据类型-----&gt;包装类：调用包装类的构造器
-        包装类-----&gt;基本数据类型：调用包装类Xxx的xxxValue()
-        基本数据类型、包装类----&gt;String类型：调用String重载的valueOf(Xxx xxx)
-        String类型-------&gt;基本数据类型、包装类：调用包装类的parseXxx(String s)
-    注意：
-        自动装箱：可以直接将基本数据类型赋给包装类，可以提高效率（只可以赋值到-128到127，当大于这个数则会通过d调用构造器来创建对象）
-        自动拆箱：直接将包装类赋给基本数据类型</code></pre>
-<hr>
-<p>###Vector类的使用</p>
-<pre><code>功能：代替数组进行处理
-使用：
-    （1）addElement(Object ob)：给向量添加元素
-    （2）elementAt(0)：取出向量中的元素，返回值是Object类型
-    （3）size()：计算向量长度 </code></pre>
-<hr>
-<p>###JDK8日期时间API</p>
-<pre><code>1.LocalDate\LocalTime\LocalDateTime
-    实例化：
-        now(Zoneid zone)：静态方法，根据当前时间创建对象/指定时区的对象
-        of()：静态方法，根据指定日期/时间创建对象，不存在偏移量
-
-    使用方法：    
-        getDayOfMonth()/getDayOfYear()：获得月份太难书(1-31)/获得年份天数(1-366)
-        getDayOfWeek()：获取星期几(返回一个DayOfWeek枚举值)
-        getMonth()：获得月份，返回一个Month枚举值
-        getMonthValue()/getYear()：获取月份(1-12)/获取年份
-        getHour()/getMinute/getSecond()：获取当前对象对应的时分秒
-        withDayOfMonth()/withDayOfYear()/withMonth()/withYear()：将月份天数、年份天数、月份、年份修改为指定的值并返回新的对象
-
-2.Instent类：时间线上的一个瞬时点
-    实例化：
-        now()：静态方法，返回默认UTC时区的Instant类的对象
-        ofEpochMilli(long epochMilli)：静态方法，返回在1970-01-01 00：00：00基础上加上指定毫秒数之后的Instant类的对象
-
-    使用：
-        atOffset(ZoneOffset offset)：结合即时的偏移来创建一个OffsetDateTime
-        toEpochMilli()：返回1970-01-01 00：00：00到当前时间的毫秒数，即为时间戳（ofEpochMilli：通过给定的毫秒数，获取Instant实例）
-
-3.DateTimeFormatter类：该类提供了三种格式化方法
-    使用：
-        ofPattern(String pattern)：静态方法，返回一个指定字符串格式的DateTimeFormatter
-        format(TemporalAccessor t)：格式化一个日期、时间，返回字符串
-        parse(CharSequence text)：将指定格式的字符序列解析为一个日期、时间
-
-4.Date类
-    位置：java.util.Date
-    使用：使用其空参构造器创建一个对应当前时间的Date对象，也可以给其构造器赋指定毫秒数
-        a.toString()：显式当前的年月日时分秒
-        b.getTime()：获取当前Date对象对应的时间戳
-
-5.java.sql.Date
-    说明：对应这数据库中的日期类型变量，该类时System类的子类
-    实例化：java.sql.Date date = new java.sql.Date(毫秒数)
-
-6.java.text.SimpleFormat类
-    说明：是一个不与语言环境有关的方式来格式化和解析日期的具体类
-    解析：文本--&gt;日期
-    使用：
-        a.格式化：日期----&gt;字符串
-            String对象 = (SimpleFormat对象).format(Date对象)
-        b.解析：格式化的逆过程，字符串----&gt;日期
-            解析的String对象需要为&quot;年份-月份-日期 上下午 时:分&quot;
-            通过指定格式实例化的方法，可以指定转换的日期格式：Date对象 = SimpleDateFormat对象.parse(&quot;指定格式时间的字符串&quot;)
-                要求：字符串必须时符合SimpleDateFormat识别的格式(通过构造器参数体现，否则抛异常)
-
-7.java.util.Calendar(日历)类
-    说明：是一个抽象基类，主要用于完成日期字段之间相互操作的功能
-    实例化：通过调用它的子类GregorianCalendar的构造器/使用Calendar.getInstance()方法
-    常用方法：
-        get()：获取常用的时间属性信息
-        set()：将指定的时间属性设置成新的值
-        add()：在原有的基础属性的值上添加
-        getTime()：日历类-----&gt;Date
-        setTime()：Date-----&gt;日历类
-    注意：月份从0开始，星期从1(星期日)开始
-
-8.其他的时间类
-    ZoneId：该类中包含了所有的时区信息】
-    ZonedDateTime：一个在ISO-8601日历系统时区的日期时间
-    Clock：使用时区提供堆当前即时、日期和时间的访问的时钟
-    Duration：用于计算两个&quot;时间&quot;间隔
-    Period：用于计算两个&quot;日期&quot;间隔
-    TemporalAdjuster：时间校正器。
-    TemporalAdjusters：该类通过静态方法(firstDayOfXxx() / lastDayOfXxx() / nextXxx())提供了大量的常用TemporalAdjust的实现</code></pre>
-<hr>
-<p>###java比较器</p>
-<pre><code>Comparable接口：自然排序
-    包：java.lang.Comparable
-    使用：
-        1.像String、包装类等实现了Comparable接口，重写了compareTo()方法，给出了比较两个对象的大小，进行从小到大的排序
-        2.重写compareTo()的规则
-            当前对象&gt;形参对象，返回正整数，&lt;返回负整数，相等返回0
-        3.对于自定义类，如果说需要排序，我们可以让自定义类实现Comparable接口，重写compareTo(obj)方法，在CompareTo(obj)方法中指明如何排序
-
-Comparator接口：定制排序、
-    包：java.lang.Comparator
-    使用：可以使用匿名的方式，重写conpare方法</code></pre>
-<p>###System类</p>
-<pre><code>说明：代表系统，系统级的很多属性和控制方法都放置在该类的内部
-包：java.lang
-使用：
-    1.该类的构造器为私有的，所以无法创建该类的对象
-    2.内部成员变量和成员方法都为static
-常用方法：
-    currentTimeMillis()：返回当前的计算机时间
-    exit(int status)：退出程序，0表示正常退出，非0表示异常退出，使用该方法可以在图形界面编程中实现程序的退出功能
-    gc()：请求系统进行垃圾回收
-    getProperty(String key)：获得系统中属性名为key的属性对应的值</code></pre>
-<p>###Math类</p>
-<pre><code>说明：提供了一系列静态方法用于科学计算，其方法的参数和返回值类型一般为double型
-包：java.lang
-常用方法：
-    abs：绝对值
-    sqrt：平方值
-    pow(a,b)：a的b次幂
-    log：自然对数
-    exp：e为底指数
-    random：返回0.0到1.0的随机数
-    round：将double类型数据转换为long</code></pre>
-<p>###BigInteger类</p>
-<pre><code>说明：
-    可以表示不可变的任意精度的整数，其提供所有Java的基本整数操作符的对应物，并提供java.lang.Math的所有相关方法，还提供：模运算、GCD计算、质数测试、素数生成、位操作以及一些其他操作
-包:java.math    
-使用：
-    构造器：BigInteger(String val)，根据字符串构建BigInteger对象    </code></pre>
-<p>###BigDecimal类<br>    说明：表示精度要求比较高的数字，该类支持不可变的、任意精度的有符号十进制定点数<br>    包：java.math<br>    使用：<br>        构造器：BigDecimal(double val/String val)<br>    常用方法：<br>        add：<br>        substract：</p>
-<p>###字符串相关的类</p>
-<pre><code>（1）string
-        特征：
-            a.不可被继承：String类是一个final类
-            b.内部定义了final char[] value用于存储字符串数据
-            c.字符串是支持序列化： String实现了Serializable接口
-            d.String可以比较大小： 实现了Comparable接口
-            e.不可变性： String代表不可变的字符序列
-                体现：
-                    1-当对字符串重新赋值时，需要重写指定内存区域赋值，不能使用原有的value进行赋值
-                    2-当对现有的字符串进行链接操作时，也需要重新指定内存区域赋值
-                    3-当调用replace()方法修改指定字符或字符串时，也需要重新制定内存区域赋值
-            f.通过字面量直接赋值(区别于new)的方式给一个字符串复制，此时字符串值生命在方法区的字符串常量池中（字符串常量池中不会存储相同内容的字符串）
-            g.通过new+构造器方式的方式直接进行实例化，其数据是存储在堆空间中开辟空间以后对应的地址值所指向的常量池
-            h.常量与常量短的拼接结果在常量池，且常量池中不会存在相同内容的常量，只要其中一个是变量，结果就在堆中
-
-        JVM中字符串常量池存放位置：
-            jdk1.6（jdk 6.0 ,java 6.0）：字符串常量池存储在方法区(永久区)
-            jdk1.7：字符串常量池存储在堆空间
-            jdk1.8：字符串常量池存储在方法区(元空间)
-
-
-        数据类型转换：
-            a.String----&gt;基本数据类型、包装类之间的转换：
-                调用包装类的静态方法：parseXxx(str)
-            b.基本数据类型、包装类----&gt;String:
-                调用String重载的valueOf(xxx)
-            c.String----&gt;char[]之间的转换
-                调用String的toCharArray()
-            d.char[]----&gt;String：
-                调用String的构造器
-            e.Stirng---&gt;byte[](该过程称为编码)：
-                调用String的getBytes()：该函数使用默认的字符集，进行转换
-            f.byte[]----&gt;String（该过程称为解码）：
-                调用String的构造器：使用默认的字符集进行解码
-
-        常用方法：
-            string inten()：要求该函 数返回值在常量池当中
-            int length()：返回字符串长度
-            char charAt(int index)：返回某索引的字符
-            boolean isEmpty()：判断是否是空字符串
-            String toLowerCase()：使用默认语言环境，将String中的所有字符为小写
-            String toUpperCase()：使用默认语言环境，将String中的所有字符转换为大写
-            String trim()：返回字符串的副本，忽略前导空白和尾部空白
-            boolean equals(Object obj)：比较字符串内容是否相同
-            boolean equalsIgnoreCase(String anotherString)：与equals方法类似，忽略大小写
-            String concat(String str)：将指定字符串链接到字符串的结尾，等价于“+”
-            int compareTo(String anotherString)：比较两个字符串的大小
-            String subString(int beginIndex)：返回一个新的字符串，从beginIndex开始截取
-            String substring(int beginIndex,int endIndex)：返回一个新字符串，它是此字符串从beginIndex截取到endIndex
-
-            boolean endWith(String suffix)：测试此字符串是否以指定的后缀结束
-            boolean startsWith(String prefix)：测试此字符串是否以指定的前缀开始
-            boolean startsWith(String prefix,int toffset)：测试此字符串从指定索引开始的子字符串是否以指定字符串开始
-
-            boolean contains(CharSequence s)：当且仅当此字符串包含指定的char值序列时，返回true
-            int indexOf(String str)：返回指定字符串在此字符串中第一次出现处的索引
-            int indexOf(String str,inr fromIndex)：返回指定字符串在此字符串中第一次出现处的索引，从指定的索引开始
-            int lastIndexOf(String str)：返回指定字符串在此字符串中最右边出现处的索引
-            int lastIndexOf(String str,int fromIndex)：返回指定子字符串在此字符串中最后一次出现处的索引，从指定的索引开始反向操作
-                注：indexOf和lastIndexOf未找到，都返回-1
-            替换：
-                String replace(char oldChar,char newChar)：返回一个新的字符串，他是通过用newChar替换此字符串中出现的所有oldChar得到
-                String replace(CharSequence target,CharSequence replacement)：使用指定的字面值替换序列替换此字符串所以匹配字面值目标序列的子字符串
-                String replaceAll(String regex,String replacement)：使用给定的replacement替换此字符串所有匹配给顶的正则表达式的子字符串
-                String replaceFirst(String regex,String replacement)：使用给定的replacement替换此字符串匹配给定的正则表达式的第一个子字符串
-            匹配：
-                boolean matches(String regex)：告知此字符串是否匹配给定的正则表达式
-            切片：
-                String[] split(String regex)：根据给定正则表达式的匹配拆分此字符串
-                String[] split(String regex，int limut)：根据匹配给定的正则表达式来拆分此字符串，最多不超过limit个，如果超过了，剩下的全部都放到最后一个元素中 
-
-（2）StringBuffer和StringBuilder
-        与String的异同点
-            a.String：不可变的字符序列，效率最低 
-                内存解析:
-                    底层使用char[]存储
-            b.StringBuffer：可变的字符序列；线程安全的，效率低；
-                内存解析：
-                    底层使用char[]存储；调用构造器创建字符数组时，默认给数组扩容为16个字符，若给到指定长度，也在原数组上扩容16，但使用length()函数返回的长度不计算这16扩容，若要添加的数据底层数组盛不下，默认情况下，扩容为原来的2倍+2，同时将原有数组中的元素赋值到新的数组中，但这种操作会降低效率
-            c.StringBuilder：可变的字符序列；jdk5.0新增，线程不安全的，效率高；
-                内存解析：
-                    底层使用char[]存储；同StringBuilder一致 
-
-        常用方法：
-            append()：提供了很多的append()方法，用于进行字符串拼接
-            delete(int start,int end)：删除指定位置的内容
-            replace(int start,int end,String str)：把[start,end)位置换位str
-            insert(int offset,xxx)：在指定位置插入xxx
-            reverse()：把当前字符序列逆转
-            setCharAt(int n,char ch)：修改指定位置的字符
-            注：
-                append和insert时，如果原来的value数组长度不够，可扩容
-                以上的方法支持方法链操作
-                方法链原理</code></pre>
-<hr>
-<p>###集合Collections工具类</p>
-<pre><code>说明：操作Map和Collection的工具类
-常用方法：
-    reverse(List)：反转List中元素的顺序
-    shuffle(List)：对List集合元素进行随机排序
-    sort(List)：根据元素的自然顺序对指定List集合元素按升序排序
-    sort(List,Comparator)：根据Comparator产生的顺序对List集合元素进行排序
-    Object max/min(Collection)：根据元素的自然顺序，返回给定集合的最大/最小元素
-    Obeject max/min(Collection,Comparator)：根据Comparator指定的顺序，返回给定集合中最大/最小的元素
-    int frequency(Collection,Object)：返回指定集合中指定元素的出现次数
-    void copy(List dest,List src)：将src中的内容赋值到dest中
-        注意：
-            if( dest.size()&lt;src.size() )
-                &lt;!-- 抛异常 --&gt;
-            else
-                复制成功
-    boolean replace(List list,Object oldVal,Object newVal)：使用新值替换List对象
-
-    注：在该类当中有多个synchronizedXxx()方法，该方法可以将指定集合包装成线程同步的集合，从而可以解决多线程并发访问集合时的线程安全问题</code></pre>
-<hr>
-<p>###日常使用</p>
-<p>（1）Eclipse快捷键(可到preference当中的keys进行修改)</p>
-<pre><code>（1）补全代码的声明：alt + /
-（2）快速修复：ctrl + 1
-（3）批量导包：ctrl + shift + o
-（4）多行注释：ctrl + shift + /（取消使用 \ ）
-（5）复制指定行的代码：ctrl + alt +down 或 ctrl + alt + up
-（6）删除指定行的代码：ctrl + d
-（7）上下移动代码：alt + up 或 alt + down
-（8）切换到下一行代码空位：shift + enter（上一行则 + ctrl）
-（9）查看源码：ctrl + 选中指定结构 或 ctrl + shift + t
-（10）退回到前一个编辑页面：alt + left（下一个编辑界面则是alt + right）
-（11）光标选中指定的类，查看继承树结构：ctrl + t
-（12）撤销与反撤销：ctrl + z/y
-（13）格式化代码：ctrl + shift +f
-（14）在当前类中，显示类结构，并支持搜索指定的方法、属性等：ctrl + o
-（15）批量修改指定的变量名、方法名、类名等：alt + shift + r
-（16）选中结构的大小写的切换：ctrl + shift + x/y
-（17）调出生成getter/setter/构造器等结构：alt + shift + s
-（18）显示当前选择资源（工程 或 文件）的属性：alt + enter
-（19）快速查找.参照选中的word快速定位到下一个：ctrl + k
-（20）关闭所有窗口：ctrl + shift + w
-（21）查看指定的结构使用过的地方：ctrl + alt + g
-（22）查找与替换：ctrl + f
-（23）最大化当前的View：ctrl + m
-（24）直接定位到当前行的首位：home
-（25）直接定位到当前行的末位：end</code></pre>
-<p>（2）JUnit单元测试</p>
-<pre><code>使用：
-    a.选中当当前工程-右键选择：bulid path - add libraries -JUnit 4 - 下一步
-    b.创建java类，进行单元测试，要求的Java类要求：1.此类权限为public 2.此类提供公共的无参构造函数
-    c.此类中声明单元测试方法：此时的单元测试方法权限是public，没有返回值，没有形参
-    d.此单元测试方法需要声明注解：@Test，并在单元测试类中导入：org.junit.Test包 </code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/04/06/java%E7%AE%80%E5%8D%95%E7%B1%BB%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="ckoo0iqvc000dl8ub2413gy28" data-title="Java类库与基本操作" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/04/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" data-id="ckp27pssa0006n8ub1lft9k4b" data-title="操作系统" class="article-share-link">Share</a>
       
       
       
@@ -2065,6 +2163,14 @@ Comparator接口：定制排序、
       <ul>
         
           <li>
+            <a href="/2021/05/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%94%E7%BD%91%E7%BB%9C%E5%B1%82/">计算机网络——网络层</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/14/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%94%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/">计算机网络——数据链路层</a>
+          </li>
+        
+          <li>
             <a href="/2021/05/14/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%94%E7%89%A9%E7%90%86%E5%B1%82/">计算机网络——物理层</a>
           </li>
         
@@ -2074,14 +2180,6 @@ Comparator接口：定制排序、
         
           <li>
             <a href="/2021/05/11/java%E7%BC%96%E7%A8%8B%E6%9D%82%E8%AE%B0/">Java编程杂记</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/">操作系统——设备管理</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">操作系统——文件管理</a>
           </li>
         
       </ul>
