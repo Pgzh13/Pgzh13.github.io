@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>操作系统 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="#操作系统##基础知识###操作系统 定义：     是指控制和管理整个计算机系统的硬件和软件资源，并合理地组织调度计算机的工作和资源的分配，以提供给用户和其他软件方便的接口和环境，是计算机系统中最基本的系统软件  功能：     --作为系统资源的管理者：         （1）处理机管理         （2）存储器管理         （3）文件管理         （4）设备管理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统">
+<meta property="og:url" content="http://example.com/2021/04/29/OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="#操作系统##基础知识###操作系统 定义：     是指控制和管理整个计算机系统的硬件和软件资源，并合理地组织调度计算机的工作和资源的分配，以提供给用户和其他软件方便的接口和环境，是计算机系统中最基本的系统软件  功能：     --作为系统资源的管理者：         （1）处理机管理         （2）存储器管理         （3）文件管理         （4）设备管理">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-04-29T11:31:00.942Z">
+<meta property="article:modified_time" content="2021-05-07T08:19:36.732Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-OS/操作系统" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/29/OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="article-date">
+  <time class="dt-published" datetime="2021-04-29T11:31:00.942Z" itemprop="datePublished">2021-04-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      操作系统
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="操作系统"><a href="#操作系统" class="headerlink" title="#操作系统"></a>#操作系统</h2><h2 id="基础知识"><a href="#基础知识" class="headerlink" title="##基础知识"></a>##基础知识</h2><p>###操作系统</p>
+<pre><code>定义：
+    是指控制和管理整个计算机系统的硬件和软件资源，并合理地组织调度计算机的工作和资源的分配，以提供给用户和其他软件方便的接口和环境，是计算机系统中最基本的系统软件
+
+功能：
+    --作为系统资源的管理者：
+        （1）处理机管理
+        （2）存储器管理
+        （3）文件管理
+        （4）设备管理
+
+    --作为永和和计算机硬件之间的接口：
+        （1）命令接口：允许用户直接使用
+            --联机命令接口
+            --脱机命令接口
+        （2）程序接口：允许用户通过程序间接使用，由一组系统调用组成，即系统调用=程序接口
+        （3）GUI(图形用户界面)
+
+特征：
+    --并发：
+        定义：指两个或多个事件在同一时间间隔内发生；这些事件在宏观上是同时发生的，但微观上是交替发生的；并发性是指计算机系统中同时存在着多个运行着的程序
+        区别：并行是指两个或多个事件在同一时刻同时发生
+
+    --共享：
+        定义：即资源共享，是指系统中的资源可供内存中多个并发执行的进程共同使用；共享性是指系统中的资源可供内存中多个并发执行的进程共同使用 
+        方式：
+            （1）互斥共享方式：系统中的某些资源，虽然可以提供给多个进程使用，但是一个时间段内只允许一个进程访问该资源
+            （2）同时共享方式：系统中的某些资源，允许一个时间段内由多个进程“同时”对其进行访问
+
+    --虚拟：
+        定义：是指把一个物理上的实体变为若干个逻辑上的对应物；物理实体是实际存在的，而逻辑上对应物使用户感受到的
+
+    --异步：
+        定义：是指在多道程序环境下，郧西多个程序并发执行，但由于资源有限，进程的执行不是一贯到底的，而是走走停停，以不可预知的速度向前推进
+
+发展：
+    --手工操作阶段
+    --多道批处理系统：
+        多道程序并发执行，共享计算机资源。资源利用率大幅提升，cpu和其他资源保持“忙碌”状态，系统吞吐量增大，但是用户响应时间长，没有人机交互功能
+    --分时操作系统：
+        计算机以时间片为单位轮流为各个用户/作业服务，各个用户可通过终端与计算机进行交互，用户请求可被即时相应，解决了人机交互问题，但不能优先处理一些紧急任务
+    --实时操作系统：
+        能够优先响应一些紧急任务，某些紧急任务不需要时间片排队；在实时操作系统的控制下，计算机系统接收到外部信号后及时进行处理，并且要在严格的时限内处理完事件，其主要特点是及时性和可靠性
+        注意：
+            --硬实时系统：必须在绝对严格的规定时间内完成
+            --软实时系统：能接受偶尔违反时间规定
+
+运行机制和体系结构
+
+    --两种处理器状态---&gt;用PSW(程序状态寄存器)中的某标志位来标识房前处理器状态0为用户，1为核心：
+        （1）用户态(目态)：此时CPU只能执行非特权指令
+        （2）核心态(管态)：特权指令、非特权指令都可执行
+
+    --两种程序：
+        （1）内核程序：是系统的管理者，可以执行所有指令，运行在核心态中
+        （2）应用程序：只能执行非特权指令，运行在用户态
+
+    --内核：
+        说明：是计算机上配置的底层软件，是操作系统最基本、最核心的部分
+        分类：
+            --大内核：
+                说明：将操作系统的主要功能模块都作为系统内核，运行在核心态
+                特点：高性能；内核代码庞大，结构混乱，难以维护
+            微内核：
+                说明：只把最基本的功能保留在内核
+                特点：内核功能少，结构清晰，方便维护；需要频繁的在核心态和用户态之间切换，性能底
+
+        功能：
+            （1）时钟管理：实现计时功能
+            （2）中断处理：负责实现中断机制
+            （3）原语：是一种特殊的程序，处于操作系统最底层，是最接近硬件的部分；这种程序的运行具有原子性(运行不可中断)；运行时间较短、调用频繁
+            （4）对系统资源尽心管理的功能
+                --进程管理
+                --存储器管理
+                --设备管理
+
+中断和异常（是为了实现多道程序并发执行而引入的一种技术）：
+    说明：
+        --中断发生时，CPU立即进入核心态
+        --中断发生后，当前运行的进程暂停运行，并由操作系统内核对中断进行处理
+        --对不同的中断信号，会进行不同的处理
+
+    分类（分类的标准--&gt;根据信号的来源：内中断是来自于CPU内部，与当前执行的指令有关，外中断是来自于CPU外部，与当前执行的指令无关）：
+        --内中断(异常/例外、陷入)：
+            （1）自愿中断：指令中断
+            （2）强迫中断：硬件故障、软件中断
+
+        --外中断(中断，狭义的中断)：
+            （1）外设请求
+            （2）人工干预
+
+    注意：用户态-&gt;核心态 是通过中断实现的，并且中断是唯一途径；而 核心态-&gt;用户态 的切换是通过执行一个特权指令，将程序状态字(PSW)的标志位设置为&quot;用户态&quot;
+
+系统调用：
+
+    说明：系统调用相关处理设计到对系统资源的管理、对进程的控制，这些功能需要执行一些特权指令才能完成，因此系统调用的相关处理需要在核心态下进行
+    作用：可以保证系统的稳定性和安全性，防止用户进行非法操作
+
+    分类
+        --按功能：
+            （1）设备管理
+            （2）文件管理
+            （3）进程管理
+            （4）进程通信
+            （5）内存管理
+
+    过程：
+        （1）传递系统调用参数
+        （2）执行陷入指令(用户态)
+        （3）执行系统调用相应服务程序(核心态)
+        （4）返回用户程序
+        注意：
+            --陷入指令是在用户态执行的，执行陷入指令之后立即引发一个内终端，从而CPU进入核心态
+            --发出系统调用请求是在用户态，而对系统调用的相应处理在核心态下进行
+            --陷入指令是唯一一个只能在用户态执行，而不可在核心态执行的指令</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/04/29/OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" data-id="ckp6cwtmk0008m8ubhcdxafoe" data-title="操作系统" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/05/07/OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          操作系统——内存管理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/04/28/Java/Java8%E6%96%B0%E7%89%B9%E6%80%A7/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java8新特性</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/05/27/Other/README/">计算机网络——网络层</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/26/ComputerNetWork/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%945%E4%BC%A0%E8%BE%93%E5%B1%82/">计算机网络——传输层</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%944%E7%BD%91%E7%BB%9C%E5%B1%82/">计算机网络——网络层</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/20/ComputerNetWork/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%944%E7%BD%91%E7%BB%9C%E5%B1%82/">计算机网络——网络层</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/14/ComputerNetWork/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%943%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/">计算机网络——数据链路层</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

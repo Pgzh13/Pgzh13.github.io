@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>操作系统——设备管理 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="#操作系统##设备管理###磁盘 调度算法：     --先来先服务     --最短寻找时间优先(SSTF)     --扫描算法(SCAN)：只有磁头移动到最外侧磁道的时候才能往内移动，移动到最内侧磁道的时候才能往外移动     --Look调度算法：如果在磁头移动方向上已经没有别的请求，就可以立即改变磁头移动的方向     --循环扫描算法(C-SCAN)：规定只有磁头朝某个特定方向移动时才">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统——设备管理">
+<meta property="og:url" content="http://example.com/2021/05/10/OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="#操作系统##设备管理###磁盘 调度算法：     --先来先服务     --最短寻找时间优先(SSTF)     --扫描算法(SCAN)：只有磁头移动到最外侧磁道的时候才能往内移动，移动到最内侧磁道的时候才能往外移动     --Look调度算法：如果在磁头移动方向上已经没有别的请求，就可以立即改变磁头移动的方向     --循环扫描算法(C-SCAN)：规定只有磁头朝某个特定方向移动时才">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-05-10T04:14:52.843Z">
+<meta property="article:modified_time" content="2021-05-10T04:14:52.844Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-OS/操作系统—设备管理" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/10/OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/" class="article-date">
+  <time class="dt-published" datetime="2021-05-10T04:14:52.843Z" itemprop="datePublished">2021-05-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      操作系统——设备管理
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="操作系统"><a href="#操作系统" class="headerlink" title="#操作系统"></a>#操作系统</h2><h2 id="设备管理"><a href="#设备管理" class="headerlink" title="##设备管理"></a>##设备管理</h2><p>###磁盘</p>
+<pre><code>调度算法：
+    --先来先服务
+    --最短寻找时间优先(SSTF)
+    --扫描算法(SCAN)：只有磁头移动到最外侧磁道的时候才能往内移动，移动到最内侧磁道的时候才能往外移动
+    --Look调度算法：如果在磁头移动方向上已经没有别的请求，就可以立即改变磁头移动的方向
+    --循环扫描算法(C-SCAN)：规定只有磁头朝某个特定方向移动时才处理磁道访问请求，而返回时直接快速移动至起始端而不处理任何请求
+    --C-Look算法：  如果磁头移动的方向上已经没有磁道访问请求了，就可以立即让磁头返回，并且磁头只需要返回到有磁头访问请求的位置即可
+
+减少延迟时间的方法：
+    --交替编号：
+        a.方法：让编号相邻的扇区在物理上不相邻
+        b.原理：读取完一个扇区需要一段事件处理才可以继续读入下一个扇区
+    --错位命名：
+        a.方法：让相邻盘面的山区编号“错误”
+        b.原理：与交替编号方法相同
+
+磁盘地址结构：
+    --采用（柱面号，盘面号、扇区号）的结构
+    --原因：在读取地址连续的磁盘块时，该结构不需要移动磁头
+
+磁盘的管理：
+    --磁盘初始化：
+        a.进行低级格式化(物理格式化)，将磁盘的各个磁道划分为扇区；一个扇区通常可分为头、数据区域、尾三个部分组成
+        b.将磁盘分区，每个分区由若干柱面组成
+        c.进行逻辑格式化，创建文件系统
+
+    --引导块：计算机启动时需要运行初始化程序(自荐程序)来完成初始化
+
+    --坏块：无法正常使用的扇区，属于硬件故障
+        a.简单的逻辑磁盘：逻辑格式化时将坏块标记出来
+        b.复杂的磁盘：磁盘控制器维护一个坏块链，并管理备用扇区</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/05/10/OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/" data-id="ckp6cwtmq000bm8ub096c7g35" data-title="操作系统——设备管理" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/05/11/Java/java%E7%BC%96%E7%A8%8B%E6%9D%82%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java编程杂记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/05/07/OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">操作系统——文件管理</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/05/27/Other/README/">计算机网络——网络层</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/26/ComputerNetWork/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%945%E4%BC%A0%E8%BE%93%E5%B1%82/">计算机网络——传输层</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%944%E7%BD%91%E7%BB%9C%E5%B1%82/">计算机网络——网络层</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/20/ComputerNetWork/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%944%E7%BD%91%E7%BB%9C%E5%B1%82/">计算机网络——网络层</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/14/ComputerNetWork/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%943%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/">计算机网络——数据链路层</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
