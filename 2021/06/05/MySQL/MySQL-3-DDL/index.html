@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>MySQL-DDL语言 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="#数据库##数据定义语言###库的管理 --库的创 建：create databse [if not exist]库名   --更改库的字符集：alter database 库名 charater set gbk  --库的删除：drop database if exists 库名 ###表的管理 --修改：     alter table 表 add&#x2F;drop&#x2F;modify&#x2F;change col">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL-DDL语言">
+<meta property="og:url" content="http://example.com/2021/06/05/MySQL/MySQL-3-DDL/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="#数据库##数据定义语言###库的管理 --库的创 建：create databse [if not exist]库名   --更改库的字符集：alter database 库名 charater set gbk  --库的删除：drop database if exists 库名 ###表的管理 --修改：     alter table 表 add&#x2F;drop&#x2F;modify&#x2F;change col">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-06-05T06:10:12.262Z">
+<meta property="article:modified_time" content="2021-06-10T08:14:43.471Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-MySQL/MySQL-3-DDL" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/06/05/MySQL/MySQL-3-DDL/" class="article-date">
+  <time class="dt-published" datetime="2021-06-05T06:10:12.262Z" itemprop="datePublished">2021-06-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      MySQL-DDL语言
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="数据库"><a href="#数据库" class="headerlink" title="#数据库"></a>#数据库</h2><h2 id="数据定义语言"><a href="#数据定义语言" class="headerlink" title="##数据定义语言"></a>##数据定义语言</h2><p>###库的管理</p>
+<pre><code>--库的创 建：create databse [if not exist]库名 
+
+--更改库的字符集：alter database 库名 charater set gbk
+
+--库的删除：drop database if exists 库名</code></pre>
+<p>###表的管理</p>
+<pre><code>--修改：
+    alter table 表 add/drop/modify/change column 列名 【列类型 约束】
+
+--复制：
+    create table 新表 like 旧表（仅复制表的结构）
+    create table 新表 select * from 旧表（复制表的结构加数据）
+
+--常见数据类型：
+    a.分类：
+        1-整型：
+            （1）分类：
+                tinyint(1)、smallint(2)、miediumint(3)、int\integer(4)、Bigint(16)
+            （2）特点：
+                --如果不设置无符号还是有符号，默认是有符号
+                    &lt;!-- 使用unsigned关键字表示无符号 --&gt;
+                --如果插入的数值超出了整型的方位，会报out of range 异常，并且插入临界值
+            （3）如果不设置长度，会有默认的长度
+            （4）长度代表了显式的最大宽度，如果不够会用0在左边填充，但必须搭配zerofill使用，在使用该关键字后默认其为无符号
+
+        2-浮点型：
+            （1）分类：
+                --浮点型：float(M，D)、double(M，D)
+                --定点型：dec(M，D)、decimal(M，D)
+            （2）特点：
+                --M代表整数部位+小数部位，D只指小数部位，如果超过范围，则插入临界值
+                --M和D可以省略，如果是decimal，则M默认为10，D默认为0，如果是float和double，则会根据插入的数值的精度来决定精度
+                --定点型的精度较高，如果要求插入数值的精度较高则考虑使用
+
+        3-字符型：
+            （1）分类：
+                --较短的文本：
+                    char(M)：固定长度的字符，耗费的空间比较多，效率高，其最大字符数M可以省略默认为1
+                    varchar(M)：可变长度的字符，比较节省空间，效率低，其最大字符数不可以省略
+
+        4-日期型： 
+            （1）分类：
+                --date：只保存日期
+                --year：只保存年份
+                --time：只保存时间
+                --datetime：保存日期+时间
+                --timestamp：保存日期+时间
+            （2）特点：
+                --timestamp支持的时间范围较小，Datetime的取值范围更大
+                --timestamp和实际时区有关，更能反映实际的日期，而datetime则只能反映出插入时的当地时区
+                --timestamp的属性受MySql版本和SQLMode的影响很大</code></pre>
+<p>###常见约束</p>
+<pre><code>--说明：用于限制表中的数据，为了保证表中的数据的准确和可靠性
+
+--分类：
+    a. NOT NULL：非空，用于保证该字段的值不能为空
+    b. DEFAULT：默认，用于保证该字段有默认值
+    c. PRIMARY KEY：用于保证该字段的值具有唯一性，并且非空
+    d. UNIQUE：唯一，用于保证该字段的值具有唯一性，可以为空
+    e. CHEAK：检查约束【mysql中不支持】
+    f. FOREIGN KEY：外键，用于限制两个表的关系，用于保证该字段的值必须来自于主表的关联列的值
+
+--约束添加的分类：
+    a.列级约束：六大约束语法上都支持，但外键约束没有效果
+    b.表级约束：除了非空、默认，其他的都支持
+        1-语法：在各个字段的最小面constraint 约束名 约束类型(字段名)
+
+    &lt;!-- 主键和唯一的区别：
+        （1）二者都是保证了数据的唯一性，而唯一允许为空，主键不能为空
+        （2）主键在一个表中只有一个，唯一在一个表中有多个
+        （3）
+     --&gt;
+
+--外键：
+    a.要求在从表设置外键关系
+    b.从表的外键列的类型和主表的关联列的类型要求一致或兼容，名称无要求
+    c.朱标的关联列必须是一个key（一般是主键或唯一）
+    d.插入数据时，先插入主表，再插入从表；删除数据时，先删除从表，在删除主表 
+
+--修改表时添加约束:
+    a.添加列级约束：
+        alter table 表名 modify colum 字段名 字段类型 新约束
+    b.添加表级约束
+        alter table 表名 add【constraint 约束名】 约束类型（字段名）| 【外键引用】
+
+--修改表时删除约束：
+    a.删除主键：
+        alter table 表名 drop primary key;
+    b.删除唯一：
+        alter table 表名 drop index 字段名</code></pre>
+<hr>
+<p>###标识列</p>
+<pre><code>--说明：又称自增长列，可以不用手动的插入值，系统提供默认的序列值
+
+--语法：在创建表时通过AUTO_INCREMENT关键字，写在字段名之后，进行标识
+
+注意：
+    a.一个表最多只有一个标识列
+    b.标识列不需要一定跟主键搭配，但要求是一个key
+    c.标识列的类型只能时数值型
+    d.标识列可以通过【 set auto_increment_increment = 数值 】来设置，也可以通过手动插入值，来设置起始值</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/06/05/MySQL/MySQL-3-DDL/" data-id="ckqbzrmzw0009k8ub36vidoai" data-title="MySQL-DDL语言" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/06/08/MySQL/MySQL-4-TCL/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          MySQL-TCL语言
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/06/04/MySQL/MySQL-2-DML/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">MySQL-DML语言</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/06/24/%E7%AE%97%E6%B3%95%E5%8E%86%E9%99%A9%E8%AE%B0/%E6%A0%88/">栈</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/23/MySQL/MySQL-others-Mycat/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/22/MySQL/MySQL-others-Knowledge/">MySQL-others-Knowledge</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/20/MySQL/MySQL-others-JDBC/">MySQL-D-其他工具</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/20/MySQL/MySQL-C-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">MySQL-C-主从复制</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
